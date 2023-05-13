@@ -13,6 +13,10 @@ from pydal.tools.tags import Tags
 from py4web.utils.factories import ActionFactory
 from . import settings
 
+from py4web.utils.form import FormStyleBulma
+from py4web.utils.url_signer import URLSigner
+
+
 # #######################################################
 # implement custom loggers form settings.LOGGERS
 # #######################################################
@@ -205,3 +209,5 @@ auth.enable(uses=(session, T, db), env=dict(T=T))
 # #######################################################
 unauthenticated = ActionFactory(db, session, T, flash, auth)
 authenticated = ActionFactory(db, session, T, flash, auth.user)
+
+signed_url = URLSigner(session)

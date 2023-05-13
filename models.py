@@ -2,8 +2,14 @@
 This file defines the database models
 """
 
-from .common import db, Field
+from .common import db, Field, auth
 from pydal.validators import *
+
+import datetime
+
+def get_user_email():
+    return auth.current_user.get('email') if auth.current_user else None
+
 
 ### Define your table below
 #
