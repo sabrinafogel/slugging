@@ -1,24 +1,48 @@
 [[extend 'layout.html']]
 
 <div class="section">
-  <div class="vars">
-      [[=message]]
+  <!-- set the tab title -->
+  <title>Slugging Carpool</title>
+
+  <!-- create a container class for formatting -->
+  <div class="container is-mobile">
+
+  <div class="columns">
+
+    <div class="column is-12">
+      <img src="[[=URL('static', 'bg_image.jpg')]]" style="display: block; margin: 0 auto; width: 168%;
+      position: relative; left: -35%; height: 900; z-index: 0; margin-top: -200px;">
+      
+      <!-- buttons on bg image -->
+      <div class="button-container" style="position: absolute; top: 80%; left: 50%; transform: translate(-50%, -130%); width: 100%;">
+
+        <div class="column is-full">
+          <div style="display: flex; justify-content: center;">
+            <p style="color: rgb(0, 60, 108); font-size: 120px;">LOOKING FOR:</p>
+          </div>
+        </div>
+      
+        <div class="column is-6" style="margin-top: 60px;">
+          <a class="button is-primary" href="[[=URL('driver')]]">
+            <span style="display: inline-block; color: white; font-size: 50px; background-color: rgb(242, 152, 19); padding-right: 150px; padding-bottom: 20px;">DRIVER</span>
+          </a>
+        </div>
+      
+        <div class="column is-6">
+          <a class="button is-primary" href="[[=URL('rider')]]">
+            <span style="display: inline-block; color: white; font-size: 50px; background-color: rgb(242, 152, 19); padding-right: 183px; padding-bottom: 20px;">RIDER</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- full width bg image column close -->
+    </div>
+      
+    <!-- full width bg image column close -->
+    </div>
+
+    <p> more site info can go here...</p>
+
+  <!-- Container close -->
   </div>
-</div>
-<div class="columns">
-  <div class="column">
-    <a class="button is-primary" href="[[=URL('drivers_table')]]">
-      <!-- Should likely be signed -->
-      <!-- Also not displaying correctly as button -->
-      <span>Looking for Drivers</span>
-    </a>
-  </div>
-  <div class="column">
-    <a class="button is-primary" href="[[=URL('riders_table')]]">
-      <!-- Should likely be signed -->
-      <!-- Also not displaying correctly as button -->
-      <span>Looking for Riders</span>
-   </a>
-  </div>
-  
 </div>
