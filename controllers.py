@@ -57,3 +57,10 @@ def edit_phones():
 
 
     return dict()
+
+@action("profile")
+@action.uses(db, 'profile.html')
+def profile():
+    # rows = db(db.user.id == auth.user_id).select().as_list()
+    # return dict(rows=rows)
+    return dict()
