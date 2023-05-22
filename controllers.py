@@ -74,17 +74,25 @@ def editProfile():
     #   redirect(URL('profile'))
     #
     return dict()
+
+@action('addSchedule', method=["GET","POST"])
+@action.uses(db,"addSchedule.html",session,auth)
+def addSchedule():
+    # assert user_id is not None
+    #get schedule for specific user 
+        #s = db(db.schedule.user_id = user_id)
+    form = Form([Field('day_of_week'), Field('available')], csrf_session=session,formstyle=FormStyleBulma)
+    if form.accepted:
+        #user_info = db(db.user.username == get_username()).select().first()
+        #assert user_info is not None
+        #db.schedule.insert(user_id=user_id, day_of_wwek=form.vars["Day of the Week"], available=form.vars["Time Available"])
+        redirect(URL('editProfile'))
+        
+    return dict(form=form)
     
 @action('editSchedule', method=["GET","POST"])
 @action.uses(db,"editSchedule.html")
-def editProfile():
+def editSchedule():
     
     return dict()
-    
-@action('addProfile', method=["GET","POST"])
-@action.uses(db,"addSchedule.html")
-def editProfile():
-    
-    return dict()
-
     
