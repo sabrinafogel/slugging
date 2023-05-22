@@ -36,6 +36,13 @@ db.define_table('user',
                 Field('schedule')
                 )
 
+db.define_table(
+    'user_schedule',
+    Field('user_id', 'reference: user'),
+    Field('day_of_week'),
+    Field('available_time')
+    )
+
 db.commit()
 ### Define your table below
 #
