@@ -64,3 +64,27 @@ def profile():
     # rows = db(db.user.id == auth.user_id).select().as_list()
     # return dict(rows=rows)
     return dict()
+
+@action('editProfile', method=["GET","POST"])
+@action.uses(db,"editProfile.html")
+def editProfile():
+    
+    #form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
+    #if form.accepted:
+    #   redirect(URL('profile'))
+    #
+    return dict()
+    
+@action('editSchedule', method=["GET","POST"])
+@action.uses(db,"editSchedule.html")
+def editProfile():
+    
+    return dict()
+    
+@action('addProfile', method=["GET","POST"])
+@action.uses(db,"addSchedule.html")
+def editProfile():
+    
+    return dict()
+
+    
