@@ -49,15 +49,18 @@
            
            <!--these are the buttons that will add and edit schedules, should schedules be its own database table?-->
            
-            <td>
-                <button class="button is-warning is-pulled-right" href="[[=URL('editSchedule')]]">
+              <td>
+                <a class="button is-warning is-pulled-right"  href="[[=URL('addSchedule')]]">
                      <span class="icon is-small"> <i class="fa fa-plus"></i> Add Schedule  </span>
-                </button>
-                
-                <button class="button is-warning is-pulled-right" href="[[=URL('addSchedule')]]">
-                     <span>Edit Schedule  </span>
-                 </button>
+                </a>
             </td>
+        
+            <td>        
+                <a class="button is-warning is-pulled-right" href="[[=URL('editSchedule')]]">
+                     <span>Edit Schedule  </span>
+                 </a>
+            </td>
+            
             
             </tr>
 
