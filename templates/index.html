@@ -1,6 +1,15 @@
 [[extend 'layout.html']]
 
-<div class="section">
+<style>
+[v-cloak] {
+     display: none;
+}
+</style>
+
+
+<div class="section" id="vue-target" v-cloak>
+  <!-- Put here your Vue.js template -->
+  
   <!-- set the tab title -->
   <title>Slugging Carpool</title>
 
@@ -10,8 +19,7 @@
   <div class="columns">
 
     <div class="column is-12">
-      <img src="[[=URL('static', 'bg_image.jpg')]]" style="display: block; margin: 0 auto; width: 168%;
-      position: relative; left: -35%; height: 900; z-index: 0; margin-top: -200px;">
+      <img src="[[=URL('static', 'bg_image.jpg')]]" style="display: block; margin: 0 auto; width: 100%; z-index: 0; margin-top: -200px;">
       
       <!-- buttons on bg image -->
       <div class="button-container" style="position: absolute; top: 80%; left: 50%; transform: translate(-50%, -130%); width: 100%;">
@@ -43,3 +51,12 @@
   <!-- Container close -->
   </div>
 </div>
+
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+<script>
+  let my_callback_url = "[[=XML(my_callback_url)]]";
+</script>
+<script src="js/index.js"></script>
+[[end]]

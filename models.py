@@ -2,14 +2,16 @@
 This file defines the database models
 """
 
+import datetime
 from .common import db, Field, auth
 from pydal.validators import *
 
-import datetime
 
 def get_user_email():
     return auth.current_user.get('email') if auth.current_user else None
 
+def get_time():
+    return datetime.datetime.utcnow()
 
 # For table 'user':
 # username = the user's username
@@ -44,11 +46,3 @@ db.define_table(
     )
 
 db.commit()
-### Define your table below
-#
-# db.define_table('thing', Field('name'))
-#
-## always commit your models to avoid problems later
-#
-# db.commit()
-#
