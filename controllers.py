@@ -74,6 +74,16 @@ def editProfile():
     #
     return dict()
 
+@action('displayProfile', method=["GET","POST"])
+@action.uses(db,"displayProfile.html")
+def displayProfile():
+    
+    #form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
+    #if form.accepted:
+    #   redirect(URL('profile'))
+    #
+    return dict()
+
 @action('addSchedule', method=["GET","POST"])
 @action.uses(db,"addSchedule.html",session,auth)
 def addSchedule():
