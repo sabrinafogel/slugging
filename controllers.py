@@ -94,3 +94,10 @@ def addSchedule():
 def editSchedule():
     
     return dict()
+
+@action("message")
+@action.uses(db, 'message.html')
+def profile():
+    # rows = db(db.user.id == auth.user_id).select().as_list()
+    # return dict(rows=rows)
+    return dict()
