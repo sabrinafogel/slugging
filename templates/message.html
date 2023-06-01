@@ -8,13 +8,13 @@
     </div>
   </div>
 
-  <div class="block">
+  <div class="block" style= "position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">
     <div class="field">
       <p class="control">
-        <input class="input" type="text" v-model="new_comment" />
+        <input class="input" type="text" v-model="new_comment" style="width: 90vw;" />
       </p>
     </div>
-    <button class="button is-primary" @click="add_comment" >Add</button>
+    <button class="button is-primary" @click="add_comment" >Send Message</button>
   </div>
 </div>
 
