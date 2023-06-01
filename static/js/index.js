@@ -10,6 +10,8 @@ let init = (app) => {
     // This is the Vue data.
     app.data = {
         // Complete as you see fit.
+        comment_list: [],
+        new_comment: "",
     };
 
     app.enumerate = (a) => {
@@ -19,10 +21,15 @@ let init = (app) => {
         return a;
     };
 
-
+    app.add_comment = function(){
+       app.vue.comment_list.push(app.vue.new_comment);
+       app.vue.new_comment = "";
+    }
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
+        add_comment: app.add_comment,
+
     };
 
     // This creates the Vue instance.
