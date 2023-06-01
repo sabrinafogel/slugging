@@ -1,5 +1,62 @@
 [[extend 'layout.html']]
+<p class="is-size-2">Riders looking for Drivers</p>
 
 <div class="section">
+    <body>
+        <div class="field has-addons">
+          <div class="control">
+            <div class="select">
+              <select>
+                <option value="date">Select Date</option>
+                <option value="date">Sunday</option>
+                <option value="date">Monday</option>
+                <option value="date">Tuesday</option>
+                <option value="date">Wednesday</option>
+                <option value="date">Thursday</option>
+                <option value="date">Friday</option>
+                <option value="date">Saturday</option>
+              </select>
+            </div>
+          </div>
+          <div class="control">
+            <button class="button is-primary">Search</button>
+          </div>
+        </div>
+      </body>
 
+
+      <body>
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="path/to/profile-picture.jpg" alt="Profile Picture">
+              </figure>
+            </div>
+            
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>Full Name</strong>: Alex Pham
+                </p>
+                <p>
+                  <strong>Location</strong>: New York City
+                </p>
+                <p>
+                    <strong>Number of Seats</strong>: 4
+                </p>
+                <p>
+                    <strong>Car Model</strong>: Honda Civic
+                </p>
+              </div>
+              <div class="control">
+                <a class="button is-primary" href="[[=URL('editProfile')]]">Full Bio</a>
+                <button class="button is-primary">Message</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </body>
+
+                  
 </div>
