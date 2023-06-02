@@ -52,19 +52,20 @@
     </div>
     <div class="column is-half">
         <!--input form that will help edit the information in the user profile.-->
+        [[for p in profile:]]
         <table class="table">
           
-            <tr><td>John Smith</td></tr>
+            <tr><td>[[=p["firstName"] + " " + p["lastName"]]]</td></tr>
                           
-             <tr><td>Ferarri</td></tr>
+             <tr><td>[[=p["carMake"]]]</td></tr>
              
-             <tr><td>Roma</td></tr> 
+             <tr><td>[[=p["carModel"]]]</td></tr> 
               
              <tr><td>5XXX555</td></tr> 
                
-             <tr><td>4</td></tr>
+             <tr><td>[[=p["numSeats"]]]</td></tr>
              
-             <tr><td>Schedule:</td></tr>
+             <tr><td>[[=p["schedule"]]]</td></tr>
              <tr>
                 <!--insert form here-->
             
@@ -72,12 +73,11 @@
              
              </tr>
  
-               
+        [[pass]]       
         </table>
     </div>
     
 </div>
-
 
     
 

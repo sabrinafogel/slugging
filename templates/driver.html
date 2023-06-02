@@ -26,36 +26,43 @@
 
 
       <body>
+        [[for i in results:]]
         <div class="box">
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <img src="static/profileTemplate.jpg" alt="Profile Picture">
+                <img src="static/profileTemplate.jpg" alt="Profile Picture"> <!-- needs to be i[profilePic] -->
               </figure>
             </div>
-            
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>Full Name</strong>: Alex Pham
+                  <strong>Full Name</strong>: [[=i["firstName"] + " " + i["lastName"]]]
                 </p>
                 <p>
-                  <strong>Location</strong>: New York City
+                  <strong>Location</strong>: [[=i["location"]]]
                 </p>
                 <p>
-                    <strong>Number of Seats</strong>: 4
+                  <strong>Car Make</strong>: [[=i["carMake"]]]
                 </p>
                 <p>
-                    <strong>Car Model</strong>: Honda Civic
+                  <strong>Car Model</strong>: [[=i["carModel"]]]
+                </p>
+                <p>
+                  <strong>Number of Seats</strong>: [[=i["numSeats"]]]
+                </p>
+                <p>
+                  <strong>Schedule</strong>: [[=i["schedule"]]]
                 </p>
               </div>
               <div class="control">
-                <a class="button is-primary" href="[[=URL('displayProfile')]]">Full Bio</a>
+                <a class="button is-primary" href="[[=URL('displayProfile', i['id'])]]">Full Bio</a>
                 <button class="button is-primary">Message</button>
               </div>
             </div>
           </article>
         </div>
+        [[pass]]
       </body>
 
                   
