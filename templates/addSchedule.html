@@ -2,5 +2,73 @@
 <div class="section">
     
     <h1 class="title">Insert a Schedule</h1>
-    [[=form]]
+    
+    <div class="field">
+        
+    <label class="label"> Day of Week  </label>
+    <div class="control">
+  <div class="select">
+    <select>
+      <option> Monday </option>
+      <option> Tuesday </option>
+      <option> Wednesday </option>
+      <option> Thursday </option>
+      <option> Friday </option>
+      <option> Saturday </option>
+      <option> Sunday </option>
+    </select>
+  </div>
+</div>
+        
+    <label class="label">Available Time </label>
+    
+     <div class="control">
+         <input class="input" type="text" placeholder="e.g 10:00 am - 12:00 pm">
+     </div>
+    </div>
+
+
+
+    <div class="control">
+  <button class="button is-primary"> Submit </button>
+    
+</div>
+  
+    
+
+
+
+   <div class= columns>
+           <div class="column is-four-fifths">
+               
+           </div>
+           
+           <div class="column is-one-fifth">
+               <table class="table">
+          
+          <tr>
+               <!--insert form here-->
+           
+           <!--these are the buttons that will add and edit schedules, should schedules be its own database table?-->
+           
+            
+             <td>        
+                <a class="button is-primary" href="[[=URL('editProfile',user_id)]]">
+                    <span class="icon"><i class="fa fa-backward"></i> </span>
+                     <span> Back </span>
+                 </a>
+            </td>
+            
+            
+            </tr>
+
+              
+              </table>
+
+               
+           </div>
+       </div>
+
+
+
 </div>

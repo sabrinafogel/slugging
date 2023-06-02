@@ -8,7 +8,7 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    margin-left: 80px;
+    margin-left: 20px;
     margin-top: 40px;
     padding: 20px; 
 }
@@ -24,18 +24,102 @@
     <div class="container is-mobile">
 
     <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar" >
-        <a class="icon is-medium"><i class="fa fa-plus"></i>  </a>
+       
     
 </div>
 
 <div class="section">
-    [[=form]]
+      <h1 class="title">Edit [[=account.first_name]]'s Profile</h1>
+    
+    <div class="field">
+        
+    <label class="label"> Full Name </label>      
+    <div class="control">
+         <input class="input" type="text" placeholder="[[=account.first_name+ account.last_name]]">
+     </div>    
+     
+     
+       <label class="label"> Location </label>      
+    <div class="control">
+         <input class="input" type="text" placeholder="e.g Oaks College">
+     </div>
+     
+
+     
+     <label class="label">Category </label>    
+   <div class="control">
+    <label class="radio">
+      <input type="radio" name="question">
+      Driver
+    </label>
+    <label class="radio">
+      <input type="radio" name="question">
+      Rider
+    </label>
+  </div>
+  
+     
+        
+    <label class="label"> Car Make </label>      
+    <div class="control">
+         <input class="input" type="text" placeholder="e.g Kia">
+     </div>
+
+    
+     <label class="label"> Car Model </label>      
+    <div class="control">
+         <input class="input" type="text" placeholder="e.g 2023 Kia Sorento">
+     </div>
+    </div>
+
+    
+  
+   
+        
+    <label class="label">Number of Seats</label>
+    
+ <div class="control">
+  <div class="select">
+    <select>
+      <option> 1 </option>
+      <option> 2 </option>
+      <option> 3 </option>
+      <option> 4 </option>
+      <option> 5 </option>
+      <option> 6 </option>
+      <option> 7 </option>
+    </select>
+  </div>
 </div>
+
+
+<div class="field is-grouped">
+    <div class="control">
+  <button class="button is-primary"> Submit </button>
+    
+</div>
+
+</div> 
+     
+    </div>
+
+
+
+    
+    
+
+
 
 
 <!--input form that will help edit the information in the user profile.-->
 
-       <table class="table">
+       <div class= columns>
+           <div class="column is-two-thirds">
+               
+           </div>
+           
+           <div class="column is-one-third">
+               <table class="table">
           
           <tr>
                <!--insert form here-->
@@ -57,7 +141,7 @@
             </td>
             
              <td>        
-                <a class="button is-link" href="[[=URL('profile')]]">
+                <a class="button is-primary" href="[[=URL('profile')]]">
                     <span class="icon"><i class="fa fa-backward"></i> </span>
                      <span> Back </span>
                  </a>
@@ -69,6 +153,9 @@
               
               </table>
 
+               
+           </div>
+       </div>
     
 </div>
 
