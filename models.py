@@ -27,7 +27,7 @@ def get_time():
 # schedule = a list of the user's on-campus schedule
 
 db.define_table('user',
-                Field('id'),
+                Field('user_id', 'reference auth_user'),
                 Field('username'),
                 Field('password'),
                 Field('profilePic'),
