@@ -51,6 +51,13 @@ db.define_table(
 db.commit()
 
 
+locationList = ["Porter", "College 9", "Kresge", "College 10", "Stevenson",
+"Merril", "Crown", "Cowell", "Nobel", "Escalona", "Downtown", "Natural Bridges", 
+"WatsonVille", "Seabright", "Capitola", "Ocean st", "Soquel", "Scotts Valley"]
+
+model = ["Ford F150", "Ford F350", "Honda Civic", "Honda Accord", "Honda CRV",
+"Toyota Supra", "Toyota Corolla", "Toyota Camry", "Toyota Prius", "Subaru WRX", 
+"Lambrogini", "Rolls Royce Phantom" ]
 
 def add_users_for_testing(num_users):
     # Test user names begin with "_".
@@ -64,7 +71,10 @@ def add_users_for_testing(num_users):
         last_name = random.choice(LAST_NAMES)
         username = "_%s%.2i" % (first_name.lower(), k)
         category = random.choice(["rider", "driver"])
-        numSeats = random.randint(1,5)
+        numSeats = random.randint(2,5)
+        carModel = random.choice(model)
+        carMake = random.randint(2000,2022)
+        location = random.choice(locationList)
         user_info = dict(
             username=username,
             #email=username + "@ucsc.edu",
@@ -73,6 +83,9 @@ def add_users_for_testing(num_users):
             password=username,  # To facilitate testing.
             category=category,
             numSeats=numSeats,
+            carModel=carModel,
+            carMake=carMake,
+            location=location
         )
         #auth.register(user_info, send=False)
         # Adds some content for each user.
@@ -82,4 +95,4 @@ def add_users_for_testing(num_users):
     
 
 #adds the amount of mock users, the value can always be changed 
-add_users_for_testing(5)
+add_users_for_testing(6)
