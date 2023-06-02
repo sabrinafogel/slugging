@@ -51,3 +51,6 @@ CREATE TABLE "user_schedule"(
     "available_time" CHAR(512)
 );
 success!
+timestamp: 2023-06-01T20:35:04.426842
+ALTER TABLE "user" ADD "profilepic" CHAR(512);
+success!
