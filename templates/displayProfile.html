@@ -5,11 +5,12 @@
 <style>
 .avatar {
     vertical-align: middle;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    padding: 10px;
-    
+    margin-left: 80px;
+    margin-top: 20px;
+    padding: 20px; 
 }
 
 
@@ -17,19 +18,30 @@
 </style>
 
 
-<title>Edit Profile</title>
+<title>Display Profile</title>
 
-<div class="container is-mobile">
-
-    <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar" >
-        <a class="icon is-medium"><i class="fa fa-plus"></i>  </a>
+<div class="columns">
+    <div class="column is-one-quarter">
+        <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
+    </div>
+    <div class="column is-one-quarter">
+        Column 2: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta quisquam maxime pariatur esse ab consequuntur odit similique sit modi quo accusantium fugit expedita cumque, sint quos, animi reprehenderit soluta impedit.</text>
+    </div>
+    <div class="column is-half">
+        Column 3: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta quisquam maxime pariatur esse ab consequuntur odit similique sit modi quo accusantium fugit expedita cumque, sint quos, animi reprehenderit soluta impedit.
+    </div>
     
 </div>
 
+<div class="container is-mobile">
+    <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
+</div>
+
+    
 
 <!--input form that will help edit the information in the user profile.-->
 
-       <table class="table">
+    <table class="table">
           
            <tr><td>First Name</td></tr>
             
@@ -39,33 +51,22 @@
             
             <tr><td>Car Model</td></tr> 
              
-             <tr><td>Lisence Plate</td></tr> 
+            <tr><td>Lisence Plate</td></tr> 
               
-               <tr><td>Number of Seats</td></tr>
+            <tr><td>Number of Seats</td></tr>
             
-             <tr><td>Schedule:</td></tr>
-          <tr>
+            <tr><td>Schedule:</td></tr>
+            <tr>
                <!--insert form here-->
            
-           <!--these are the buttons that will add and edit schedules, should schedules be its own database table?-->
            
-              <td>
-                <a class="button is-warning is-pulled-right"  href="[[=URL('addSchedule')]]">
-                     <span class="icon is-small"> <i class="fa fa-plus"></i> Add Schedule  </span>
-                </a>
-            </td>
-        
-            <td>        
-                <a class="button is-warning is-pulled-right" href="[[=URL('editSchedule')]]">
-                     <span>Edit Schedule  </span>
-                 </a>
-            </td>
-            
             
             </tr>
 
               
-              </table>
+    </table>
+    <!-- This button should eventually go back to whichever page the user was previously at (rider or driver)-->
+    <a class="button is-primary" href="[[=URL('index')]]">Back</a>
 
 
 
