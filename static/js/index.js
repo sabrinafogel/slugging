@@ -22,8 +22,14 @@ let init = (app) => {
     };
 
     app.add_comment = function(){
-       app.vue.comment_list.push(app.vue.new_comment);
-       app.vue.new_comment = "";
+//       app.vue.comment_list.push(app.vue.new_comment);
+//       app.vue.new_comment = "";
+         app.vue.comment_list.push({
+         text: app.vue.new_comment,
+         alignRight: false// Set alignRight to true for right-aligned messages
+         });
+         app.vue.new_comment = "";
+
     }
     // This contains all the methods.
     app.methods = {
