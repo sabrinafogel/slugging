@@ -64,6 +64,7 @@ def add_users_for_testing(num_users):
         last_name = random.choice(LAST_NAMES)
         username = "_%s%.2i" % (first_name.lower(), k)
         category = random.choice(["rider", "driver"])
+        numSeats = random.randint(1,5)
         user_info = dict(
             username=username,
             #email=username + "@ucsc.edu",
@@ -71,6 +72,7 @@ def add_users_for_testing(num_users):
             lastName=last_name,
             password=username,  # To facilitate testing.
             category=category,
+            numSeats=numSeats,
         )
         #auth.register(user_info, send=False)
         # Adds some content for each user.
