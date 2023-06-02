@@ -30,6 +30,7 @@ db.define_table('user',
                 Field('id'),
                 Field('username'),
                 Field('password'),
+                Field('profilePic'),
                 Field('firstName'),
                 Field('lastName'),
                 Field('category'),
@@ -60,14 +61,16 @@ def add_users_for_testing(num_users):
     print("Adding", num_new_users, "users.")
     for k in range(num_test_users, num_users):
         first_name = random.choice(FIRST_NAMES)
-        last_name = first_name = random.choice(LAST_NAMES)
+        last_name = random.choice(LAST_NAMES)
         username = "_%s%.2i" % (first_name.lower(), k)
+        category = random.choice(["rider", "driver"])
         user_info = dict(
             username=username,
             #email=username + "@ucsc.edu",
             firstName=first_name,
             lastName=last_name,
             password=username,  # To facilitate testing.
+            category=category,
         )
         #auth.register(user_info, send=False)
         # Adds some content for each user.

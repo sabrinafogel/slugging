@@ -44,7 +44,7 @@ def index():
 # driver search
 @action("driver")
 @action.uses(db, 'driver.html')
-def edit_phones():
+def driver():
 
 
     return dict()
@@ -52,7 +52,7 @@ def edit_phones():
 # rider search
 @action("rider")
 @action.uses(db, 'rider.html')
-def edit_phones():
+def rider():
 
 
     return dict()
