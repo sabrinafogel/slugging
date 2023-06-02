@@ -9,9 +9,10 @@
     height: 200px;
     border-radius: 50%;
     margin-left: 80px;
-    margin-top: 20px;
+    margin-top: 40px;
     padding: 20px; 
 }
+
 
 
 
@@ -25,48 +26,66 @@
         <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
     </div>
     <div class="column is-one-quarter">
-        Column 2: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta quisquam maxime pariatur esse ab consequuntur odit similique sit modi quo accusantium fugit expedita cumque, sint quos, animi reprehenderit soluta impedit.</text>
+        <!--Labels for the table-->
+        <table class="table">
+          
+            <tr><td>Name</td></tr>
+                         
+             <tr><td>Car Make</td></tr>
+             
+             <tr><td>Car Model</td></tr> 
+              
+             <tr><td>Lisence Plate</td></tr> 
+               
+             <tr><td>Number of Seats</td></tr>
+             
+             <tr><td>Schedule:</td></tr>
+             <tr>
+                <!--insert form here-->
+            
+            
+             
+             </tr>
+ 
+               
+        </table>
     </div>
     <div class="column is-half">
-        Column 3: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta quisquam maxime pariatur esse ab consequuntur odit similique sit modi quo accusantium fugit expedita cumque, sint quos, animi reprehenderit soluta impedit.
+        <!--input form that will help edit the information in the user profile.-->
+        <table class="table">
+          
+            <tr><td>John Smith</td></tr>
+                          
+             <tr><td>Ferarri</td></tr>
+             
+             <tr><td>Roma</td></tr> 
+              
+             <tr><td>5XXX555</td></tr> 
+               
+             <tr><td>4</td></tr>
+             
+             <tr><td>Schedule:</td></tr>
+             <tr>
+                <!--insert form here-->
+            
+            
+             
+             </tr>
+ 
+               
+        </table>
     </div>
     
 </div>
 
-<div class="container is-mobile">
-    <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
-</div>
 
     
 
-<!--input form that will help edit the information in the user profile.-->
 
-    <table class="table">
-          
-           <tr><td>First Name</td></tr>
-            
-            <tr><td>Last Name</td></tr>
-            
-            <tr><td>Car Make</td></tr>
-            
-            <tr><td>Car Model</td></tr> 
-             
-            <tr><td>Lisence Plate</td></tr> 
-              
-            <tr><td>Number of Seats</td></tr>
-            
-            <tr><td>Schedule:</td></tr>
-            <tr>
-               <!--insert form here-->
-           
-           
-            
-            </tr>
 
-              
-    </table>
-    <!-- This button should eventually go back to whichever page the user was previously at (rider or driver)-->
-    <a class="button is-primary" href="[[=URL('index')]]">Back</a>
+    
+<!-- This button should eventually go back to whichever page the user was previously at (rider or driver)-->
+<a class="button is-primary" href="[[=URL('index')]]">Back</a>
 
 
 
