@@ -1,29 +1,92 @@
 [[extend "layout.html"]]
+
 <!-- Authored by S. Fogel -->
 <!-- User Profile Display Page -->
 <style>
 .avatar {
     vertical-align: middle;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    padding: 10px;
+    margin-left: 80px;
+    margin-top: 40px;
+    padding: 20px; 
 }
-</style>
-<title>Profile</title>
 
-<h2>User Profile</h2>
-<div class="container is-mobile">
-    <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
+
+
+
+</style>
+
+
+<title>Display Profile</title>
+
+    <div class="columns">
+    <div class="column is-one-quarter">
+        <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
+    </div>
+    <div class="column is-one-quarter">
+        <!--Labels for the table-->
+        <table class="table">
+          
+            <tr><td>Name</td></tr>
+            
+            <tr> <td> Category</td> </tr>
+             
+             <tr><td>Schedule:</td></tr>
+             <!--if the user is a driver than it should display certain info such as the car make, number of seats, and car model -->
+            
+               
+        </table>
+    </div>
+    <div class="column is-half">
+        <!--input form that will help edit the information in the user profile.-->
+        [[for r in rows:]]
+        <table class="table">
+          
+            <tr><td>[[=r["first_name"] + " " + r["last_name"]]] </td></tr>
+                          
+             <tr><td>  Rider</td></tr>
+             
+             <tr><td>  No Schedule </td></tr>
+             
+             <tr>
+                  <td>
+                    <a class="button is-warning" href="[[=URL('editProfile', r['id'] )]]">
+                        <span class="icon"> <i class="fa fa-bars"></i> </span>
+                        <span>Edit</span>
+                    </a> 
+                </td>
+                
+                <td>
+                     <a class="button is-link" href="[[=URL('index')]]">
+                    <span class="icon"><i class="fa fa-backward"></i> </span>
+                     <span> Back </span>
+                 </a>
+                </td>
+            
+             </tr> 
+              
+             
+        
+          
+        </table>
+        [[pass]]
+    </div>
     
 </div>
-<div class="conatiner is-mobile">
-    Name: <br>
-    Driver or Rider <br>
-    Car Information and Number of Seats <br>
-    Pickup Location <br>
-    On-Campus Schedule <br>
-</div>
-<a class="button is-primary" href="[[=URL('editProfile')]]">
-    <span style="color: white; background-color: rgb(0, 60, 108);">Edit Profile</span>
-</a>
+
+    
+
+
+
+
+
+
+
+    
+
+
+
+
+
