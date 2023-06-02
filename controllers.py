@@ -78,10 +78,11 @@ def profile():
 def editProfile(user_id=None):
     assert user_id is not None 
     form = Form(db.auth_user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
+    a = db(db.auth_user.id == user_id).select().first()
     if form.accepted:
        redirect(URL('profile'))
     #
-    return dict(form=form, user_id=user_id)
+    return dict(account=a,form=form, user_id=user_id)
 
 
 @action('displayProfile/<id:int>', method=["GET","POST"])
@@ -109,7 +110,7 @@ def addSchedule(user_id=None):
         #db.schedule.insert(user_id=user_id, day_of_week=form.vars["Day of the Week"], available=form.vars["Time Available"])
         redirect(URL('editProfile',user_id))
         
-    return dict(form=form)
+    return dict(form=form,  user_id=user_id)
     
 @action('editSchedule/<user_id:int>' , method=["GET","POST"])
 @action.uses(db,"editSchedule.html",session,auth)
