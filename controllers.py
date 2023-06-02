@@ -107,7 +107,7 @@ def addSchedule(user_id=None):
         #user_info = db(db.user.username == get_username()).select().first()
         #assert user_info is not None
         #db.schedule.insert(user_id=user_id, day_of_week=form.vars["Day of the Week"], available=form.vars["Time Available"])
-        redirect(URL('editProfile'))
+        redirect(URL('editProfile',user_id))
         
     return dict(form=form)
     
