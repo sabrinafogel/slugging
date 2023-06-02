@@ -45,17 +45,25 @@ def index():
 @action("driver")
 @action.uses(db, 'driver.html')
 def driver():
+    results = []
 
+    for user in db(db.user).select().as_list():
+        if user['category'] == ("driver"):
+            results.append(user)
 
-    return dict()
+    return dict(results=results)
 
 # rider search
 @action("rider")
 @action.uses(db, 'rider.html')
 def rider():
+    results = []
 
-
-    return dict()
+    for user in db(db.user).select().as_list():
+        if user['category'] == ("rider"):
+            results.append(user)
+    
+    return dict(results=results)
 
 @action("profile")
 @action.uses(db, 'profile.html')

@@ -1,6 +1,6 @@
 [[extend 'layout.html']]
 
-<p class="is-size-2">Available Drivers</p>
+<p class="is-size-2">Available Riders</p>
 
 <div class="section">
     <body>
@@ -27,26 +27,24 @@
 
 
       <body>
+        [[for i in results:]]
         <div class="box">
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <img src="static/profileTemplate.jpg" alt="Profile Picture">
+                <img src="static/profileTemplate.jpg" alt="Profile Picture"> <!-- needs to be i[profilePic] -->
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>Full Name</strong>: Alex Pham
+                  <strong>Full Name</strong>: [[=i["firstName"] + " " + i["lastName"]]]
                 </p>
                 <p>
-                  <strong>Location</strong>: New York City
+                  <strong>Location</strong>: [[=i["location"]]]
                 </p>
                 <p>
-                    <strong>Number of Seats</strong>: 4
-                </p>
-                <p>
-                    <strong>Car Model</strong>: Honda Civic
+                  <strong>Schedule</strong>: [[=i["schedule"]]]
                 </p>
               </div>
               <div class="control">
@@ -56,7 +54,8 @@
             </div>
           </article>
         </div>
+        [[pass]]
       </body>
-
+      
                   
 </div>
