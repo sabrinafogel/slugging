@@ -81,7 +81,7 @@ def editProfile(user_id=None):
     if form.accepted:
        redirect(URL('profile'))
     #
-    return dict(form=form)
+    return dict(form=form, user_id=user_id)
 
 
 @action('displayProfile/<id:int>', method=["GET","POST"])
