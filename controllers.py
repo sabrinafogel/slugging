@@ -35,7 +35,7 @@ from .models import get_user_email
 url_signer = URLSigner(session)
 
 @action('index')
-@action.uses('index.html', db, auth, url_signer)
+@action.uses('index.html', db, auth, url_signer, session)
 def index():
     return dict(
         # COMPLETE: return here any signed URLs you need.
@@ -44,7 +44,7 @@ def index():
 
 # driver search
 @action("driver")
-@action.uses(db, 'driver.html')
+@action.uses(db, 'driver.html', auth)
 def driver():
     results = []
 
@@ -56,7 +56,7 @@ def driver():
 
 # rider search
 @action("rider")
-@action.uses(db, 'rider.html')
+@action.uses(db, 'rider.html', auth)
 def rider():
     results = []
 
@@ -67,14 +67,14 @@ def rider():
     return dict(results=results)
 
 @action("profile")
-@action.uses(db, auth, 'profile.html')
+@action.uses(db, 'profile.html', auth)
 def profile():
     rows = db(db.auth_user.email == get_user_email() ).select().as_list()
     return dict(rows=rows)
-  
+
 
 @action('editProfile/<user_id:int>', method=["GET","POST"])
-@action.uses(db,auth, session, url_signer, "editProfile.html")
+@action.uses(db, auth, session, url_signer, "editProfile.html")
 def editProfile(user_id=None):
     assert user_id is not None 
     form = Form(db.auth_user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
@@ -86,7 +86,7 @@ def editProfile(user_id=None):
 
 
 @action('displayProfile/<id:int>', method=["GET","POST"])
-@action.uses(db,"displayProfile.html")
+@action.uses(db, "displayProfile.html", auth)
 def displayProfile(id=None):
     assert id is not None
     profile = db(db.user.id == id).select().as_list()
@@ -98,7 +98,7 @@ def displayProfile(id=None):
     return dict(profile=profile)
 
 @action('addSchedule/<user_id:int>' , method=["GET","POST"])
-@action.uses(db,"addSchedule.html",session,auth)
+@action.uses(db, "addSchedule.html", session, auth)
 def addSchedule(user_id=None):
     assert user_id is not None
     #get schedule for specific user 
@@ -113,13 +113,13 @@ def addSchedule(user_id=None):
     return dict(form=form,  user_id=user_id)
     
 @action('editSchedule/<user_id:int>' , method=["GET","POST"])
-@action.uses(db,"editSchedule.html",session,auth)
+@action.uses(db, "editSchedule.html", session, auth)
 def editSchedule(user_id=None):
     assert user_id is not None
     return dict()
 
 @action("message")
-@action.uses(db, 'message.html')
+@action.uses(db, 'message.html', auth)
 def profile():
     # rows = db(db.user.id == auth.user_id).select().as_list()
     # return dict(rows=rows)
