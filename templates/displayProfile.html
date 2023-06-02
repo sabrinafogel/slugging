@@ -72,6 +72,29 @@
             
              
              </tr>
+            
+              <tr>
+             [[if p["category"] == "rider":]]
+             <!-- This button should eventually go back to whichever page the user was previously at (rider or driver)-->
+                <td><a class="button is-primary" href="[[=URL('rider')]]">
+                     <span class="icon"><i class="fa fa-backward"></i></span>
+                    <span>Back</span>
+                    </a>
+                    </td>
+            [[else:]]
+                <td><a class="button is-primary" href="[[=URL('driver')]]">
+                  <span class="icon"><i class="fa fa-backward"></i></span>
+                    <span>Back</span>
+                </a> </td>
+            [[pass]]
+            
+            <td><a class="button is-warning" href="[[=URL('message')]]">
+                  <span class="icon"> <i class="fa fa-envelope" > </i></span>
+                    <span>Message</span>
+                </a> </td>
+            
+            </tr>
+
  
         [[pass]]       
         </table>
@@ -80,12 +103,6 @@
 </div>
 
     
-
-
-
-    
-<!-- This button should eventually go back to whichever page the user was previously at (rider or driver)-->
-<a class="button is-primary" href="[[=URL('index')]]">Back</a>
 
 
 
