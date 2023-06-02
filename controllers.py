@@ -25,8 +25,9 @@ session, db, T, auth, and tempates are examples of Fixtures.
 Warning: Fixtures MUST be declared with @action.uses({fixtures}) else your app will result in undefined behavior
 """
 
-from py4web import action, request, abort, redirect, URL
+from py4web import action, request, abort, redirect, URL,Field
 from yatl.helpers import A
+from py4web.utils.form import Form, FormStyleBulma
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_email
@@ -66,21 +67,22 @@ def rider():
     return dict(results=results)
 
 @action("profile")
-@action.uses(db, 'profile.html')
+@action.uses(db, auth, 'profile.html')
 def profile():
-    # rows = db(db.user.id == auth.user_id).select().as_list()
-    # return dict(rows=rows)
-    return dict()
+    rows = db(db.auth_user.email == get_user_email() ).select().as_list()
+    return dict(rows=rows)
+  
 
-@action('editProfile', method=["GET","POST"])
-@action.uses(db,"editProfile.html")
-def editProfile():
-    
-    #form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
-    #if form.accepted:
-    #   redirect(URL('profile'))
+@action('editProfile/<user_id:int>', method=["GET","POST"])
+@action.uses(db,auth, session, url_signer, "editProfile.html")
+def editProfile(user_id=None):
+    assert user_id is not None 
+    form = Form(db.auth_user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
+    if form.accepted:
+       redirect(URL('profile'))
     #
-    return dict()
+    return dict(form=form)
+
 
 @action('displayProfile/<id:int>', method=["GET","POST"])
 @action.uses(db,"displayProfile.html")
@@ -94,25 +96,25 @@ def displayProfile(id=None):
     #
     return dict(profile=profile)
 
-@action('addSchedule', method=["GET","POST"])
+@action('addSchedule/<user_id:int>' , method=["GET","POST"])
 @action.uses(db,"addSchedule.html",session,auth)
-def addSchedule():
-    # assert user_id is not None
+def addSchedule(user_id=None):
+    assert user_id is not None
     #get schedule for specific user 
         #s = db(db.schedule.user_id = user_id)
     form = Form([Field('day_of_week'), Field('available')], csrf_session=session,formstyle=FormStyleBulma)
     if form.accepted:
         #user_info = db(db.user.username == get_username()).select().first()
         #assert user_info is not None
-        #db.schedule.insert(user_id=user_id, day_of_wwek=form.vars["Day of the Week"], available=form.vars["Time Available"])
+        #db.schedule.insert(user_id=user_id, day_of_week=form.vars["Day of the Week"], available=form.vars["Time Available"])
         redirect(URL('editProfile'))
         
     return dict(form=form)
     
-@action('editSchedule', method=["GET","POST"])
-@action.uses(db,"editSchedule.html")
-def editSchedule():
-    
+@action('editSchedule/<user_id:int>' , method=["GET","POST"])
+@action.uses(db,"editSchedule.html",session,auth)
+def editSchedule(user_id=None):
+    assert user_id is not None
     return dict()
 
 @action("message")
