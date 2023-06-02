@@ -1,16 +1,47 @@
 [[extend "layout.html"]]
 
+<style>
+#comments .block{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
+
+.message-body.is-pulled-right {
+  align-self: flex-end;
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.message-body:not(.is-pulled-right) {
+  background-color: lightblue;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+</style>
+
+
+
 <div class="section" id="vue-target">
   <div id="comments" class="block">
     <!-- Here will go the comments. -->
     <div v-for="c in comment_list" class="block">
-      {{c}}
+      <div class="message-body" :class="{'is-pulled-right': c.alignRight}">
+        {{c.text}}
+      </div>
     </div>
   </div>
 
   <div class="block" style= "position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">
-    <div class="field">
-      <p class="control">
+    <div class="field is-grouped">
+      <p class="control is-expanded">
         <input class="input" type="text" v-model="new_comment" style="width: 90vw;" />
       </p>
     </div>
