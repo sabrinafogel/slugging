@@ -50,6 +50,12 @@ db.define_table(
 
 db.commit()
 
+#just added messages table
+db.define_table('message',
+    Field('user_id', 'reference auth_user'),
+    Field('text', 'text')
+)
+
 
 locationList = ["Porter", "College 9", "Kresge", "College 10", "Stevenson",
 "Merril", "Crown", "Cowell", "Nobel", "Escalona", "Downtown", "Natural Bridges", 
