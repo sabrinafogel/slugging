@@ -129,13 +129,13 @@ def profile():
 @action("load_messages")
 @action.uses(url_signer.verify(), db)
 def load_messages():
-    comment_list = db(db.message).select().as_list()
+    comment_list = db(db.user_message).select().as_list()
     return dict(comment_list=comment_list)
 
 @action("add_messages", method="POST")
 @action.uses(url_signer.verify(),db)
 def add_messages():
-    id = db.message.insert(
+    id = db.user_message.insert(
        text=request.json.get('text')
     )
     return dict(id=id)
