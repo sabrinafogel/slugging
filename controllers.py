@@ -81,7 +81,7 @@ def editProfile(user_id=None):
     a = db(db.auth_user.id == user_id).select().first()
     if form.accepted:
        redirect(URL('profile'))
-    #
+    
     return dict(account=a,form=form, user_id=user_id)
 
 
@@ -90,7 +90,6 @@ def editProfile(user_id=None):
 def displayProfile(id=None):
     assert id is not None
     profile = db(db.user.id == id).select().as_list()
-    print(profile)
     #form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
     #if form.accepted:
     #   redirect(URL('profile'))
