@@ -20,36 +20,35 @@
 
 
 <title>Display Profile</title>
+<!--Needs to be different for drivers and riders-->
 
 <div class="columns">
     <div class="column is-one-quarter">
         <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
     </div>
+    [[for p in profile:]]
     <div class="column is-one-quarter">
-        <!--Labels for the table-->
+        [[if p["category"] == "rider":]]
         <table class="table">
-          
             <tr><td>Name</td></tr>
-                         
-             <tr><td>Car Make</td></tr>
-             
-             <tr><td>Car Model</td></tr> 
-              
-             <tr><td>Lisence Plate</td></tr> 
-               
-             <tr><td>Number of Seats</td></tr>
-             
-             <tr><td>Schedule:</td></tr>
-             <tr>
-                <!--insert form here-->
-            
-            
-             
-             </tr>
- 
-               
+            <tr><td>Schedule</td></tr>
         </table>
+
+        [[else:]] <!--p is a driver-->
+        <table class="table">
+            <tr><td>Name</td></tr>       
+            <tr><td>Car Make</td></tr>
+            <tr><td>Car Model</td></tr> 
+            <tr><td>Lisence Plate</td></tr> 
+            <tr><td>Number of Seats</td></tr>
+            <tr><td>Schedule</td></tr>
+            <tr>
+                <!--insert form here-->
+            </tr>      
+        </table>
+        [[pass]]
     </div>
+    [[pass]]
     <div class="column is-half">
         <!--input form that will help edit the information in the user profile.-->
         [[for p in profile:]]
@@ -74,7 +73,7 @@
              </tr>
             
               <tr>
-             [[if p["category"] == "rider":]]
+            [[if p["category"] == "rider":]]
              <!-- This button should eventually go back to whichever page the user was previously at (rider or driver)-->
                 <td><a class="button is-primary" href="[[=URL('rider')]]">
                      <span class="icon"><i class="fa fa-backward"></i></span>
