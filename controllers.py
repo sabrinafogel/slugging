@@ -74,7 +74,7 @@ def profile():
 
 
 @action('editProfile/<user_id:int>', method=["GET","POST"])
-@action.uses(db, auth, session, url_signer, "editProfile.html")
+@action.uses(db, session, url_signer, "editProfile.html", auth)
 def editProfile(user_id=None):
     assert user_id is not None 
     form = Form(db.auth_user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
