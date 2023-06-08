@@ -59,6 +59,10 @@ model = ["Ford F150", "Ford F350", "Honda Civic", "Honda Accord", "Honda CRV",
 "Toyota Supra", "Toyota Corolla", "Toyota Camry", "Toyota Prius", "Subaru WRX", 
 "Lambrogini", "Rolls Royce Phantom" ]
 
+days_of_week = ["Monday", "Tuesday","Wednesday", "Thursday","Friday", "Saturday", "Sunday"]
+
+r_times = ["9:00 am" , "10:00 am", "11:00 am", "12:00 pm", "1:00 pm", "2:00 pm","3:00 pm", "4:00 pm"]
+
 def add_users_for_testing(num_users):
     # Test user names begin with "_".
     # Counts how many users we need to add.
@@ -89,7 +93,16 @@ def add_users_for_testing(num_users):
         )
         #auth.register(user_info, send=False)
         # Adds some content for each user.
-        db.user.insert(**user_info)     
+        db.user.insert(**user_info)
+    users = db(db.user).select()
+    for u in users:
+        user_schedule = dict(
+        user_id = u.id,
+        day_of_week = random.choice(days_of_week),
+        available_time = random.choice(r_times)  
+        )
+        db.user_schedule.insert(**user_schedule) 
+       
        
     db.commit()
     
