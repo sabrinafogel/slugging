@@ -49,7 +49,7 @@ db.define_table(
     )
 
 #just added messages table
-db.define_table('message',
+db.define_table('user_message',
     Field('user_id', 'reference auth_user'),
     Field('text', 'text')
 )
