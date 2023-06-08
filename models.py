@@ -57,7 +57,9 @@ locationList = ["Porter", "College 9", "Kresge", "College 10", "Stevenson",
 
 model = ["Ford F150", "Ford F350", "Honda Civic", "Honda Accord", "Honda CRV",
 "Toyota Supra", "Toyota Corolla", "Toyota Camry", "Toyota Prius", "Subaru WRX", 
-"Lambrogini", "Rolls Royce Phantom" ]
+"Lambrogini", "Rolls Royce Phantom", "Volkswagen Golf", "Ford Fusion", "Ford Fiesta", 
+"Volkswagen Beetle", "Audi A3", "Chevrolet Impala", "GMC Sierra", "Dodge Ram", 
+"Dodge Charger", "Toyota Tacoma" ]
 
 days_of_week = ["Monday", "Tuesday","Wednesday", "Thursday","Friday", "Saturday", "Sunday"]
 
@@ -108,4 +110,4 @@ def add_users_for_testing(num_users):
     
 
 #adds the amount of mock users, the value can always be changed 
-add_users_for_testing(6)
+add_users_for_testing(50)
