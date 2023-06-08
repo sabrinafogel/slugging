@@ -49,30 +49,32 @@
         [[pass]]
     </div>
     [[pass]]
+
+    [[for p in profile:]]
     <div class="column is-half">
-        <!--input form that will help edit the information in the user profile.-->
-        [[for p in profile:]]
-        <table class="table">
-          
-            <tr><td>[[=p["firstName"] + " " + p["lastName"]]]</td></tr>
-                          
-             <tr><td>[[=p["carMake"]]]</td></tr>
-             
-             <tr><td>[[=p["carModel"]]]</td></tr> 
-              
-             <tr><td>5XXX555</td></tr> 
-               
-             <tr><td>[[=p["numSeats"]]]</td></tr>
-             
-             <tr><td>[[=p["schedule"]]]</td></tr>
-             <tr>
-                <!--insert form here-->
-            
-            
-             
-             </tr>
-            
-              <tr>
+    <!--input form that will help edit the information in the user profile.-->
+        [[if p["category"] == "rider":]]
+            <table class="table">
+                <tr><td>[[=p["firstName"] + " " + p["lastName"]]]</td></tr>
+                <tr><td>[[=p["schedule"]]]</td></tr>
+                
+            </table>
+
+        [[else:]] <!--p is a driver-->
+            <table class="table">
+                <tr><td>[[=p["firstName"] + " " + p["lastName"]]]</td></tr>       
+                <tr><td>[[=p["carMake"]]]</td></tr>
+                <tr><td>[[=p["carModel"]]]</td></tr> 
+                <tr><td>5XXX555</td></tr> 
+                <tr><td>[[=p["numSeats"]]]</td></tr>
+                <tr><td>[[=p["schedule"]]]</td></tr>
+                <tr>
+                    <!--insert form here-->
+                </tr>      
+            </table>
+        [[pass]]
+        
+            <tr>
             [[if p["category"] == "rider":]]
              <!-- This button should eventually go back to whichever page the user was previously at (rider or driver)-->
                 <td><a class="button is-primary" href="[[=URL('rider')]]">
@@ -95,9 +97,9 @@
             </tr>
 
  
-        [[pass]]       
-        </table>
+         
     </div>
+    [[pass]]  
     
 </div>
 
