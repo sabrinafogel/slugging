@@ -24,13 +24,29 @@ let init = (app) => {
     app.add_comment = function(){
 //       app.vue.comment_list.push(app.vue.new_comment);
 //       app.vue.new_comment = "";
-         app.vue.comment_list.push({
-         text: app.vue.new_comment,
-         alignRight: false// Set alignRight to true for right-aligned messages
+         axios.post(add_messages_url,
+         {
+           text: app.vue.new_comment
+//           alignRight: false// Set alignRight to true for right-aligned messages
+         }).then(function(response){
+          app.vue.comment_list.push({
+              id:response.data.id,
+              text: app.vue.new_comment,
+          });
+          app.enumerate(app.vue.comment_list);
          });
-         app.vue.new_comment = "";
+      };
 
-    }
+
+//working
+//         app.vue.comment_list.push({
+//         text: app.vue.new_comment,
+//         alignRight: false// Set alignRight to true for right-aligned messages
+//         });
+//         app.vue.new_comment = "";
+//    }
+//working
+
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
@@ -49,6 +65,11 @@ let init = (app) => {
     app.init = () => {
         // Put here any initialization code.
         // Typically this is a server GET call to load the data.
+        //new
+        axios.get(load_messages_url).then(function(response){
+            app.vue.comment_list = app.enumerate(response.data.comment_list); //add index to each elem of array
+        });
+        //new
     };
 
     // Call to the initializer.
