@@ -48,13 +48,14 @@ db.define_table(
     Field('available_time')
     )
 
-db.commit()
-
 #just added messages table
 db.define_table('message',
     Field('user_id', 'reference auth_user'),
     Field('text', 'text')
 )
+
+db.commit()
+
 
 
 locationList = ["Porter", "College 9", "Kresge", "College 10", "Stevenson",

@@ -54,3 +54,13 @@ success!
 timestamp: 2023-06-01T20:35:04.426842
 ALTER TABLE "user" ADD "profilepic" CHAR(512);
 success!
+timestamp: 2023-06-02T09:59:53.930609
+ALTER TABLE "user" ADD "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
+success!
+timestamp: 2023-06-07T22:35:20.514815
+CREATE TABLE "message"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "text" TEXT
+);
+success!

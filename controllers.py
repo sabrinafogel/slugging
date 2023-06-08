@@ -39,7 +39,7 @@ url_signer = URLSigner(session)
 def index():
     return dict(
         # COMPLETE: return here any signed URLs you need.
-        my_callback_url = URL('my_callback', signer=url_signer),
+        my_callback_url = URL('my_callback', signer=url_signer)
     )
 
 # driver search
@@ -122,4 +122,24 @@ def editSchedule(user_id=None):
 def profile():
     # rows = db(db.user.id == auth.user_id).select().as_list()
     # return dict(rows=rows)
-    return dict()
+    return dict(load_messages_url = URL('load_messages', signer=url_signer),
+                add_messages_url = URL('add_messages', signer=url_signer)) #just added
+
+# This is our first message API function
+@action("load_messages")
+@action.uses(url_signer.verify(), db)
+def load_messages():
+    comment_list = db(db.message).select().as_list()
+    return dict(comment_list=comment_list)
+
+@action("add_messages", method="POST")
+@action.uses(url_signer.verify(),db)
+def add_messages():
+    id = db.message.insert(
+       text=request.json.get('text')
+    )
+    return dict(id=id)
+
+
+
+

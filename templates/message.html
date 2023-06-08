@@ -28,7 +28,6 @@
 </style>
 
 
-
 <div class="section" id="vue-target">
   <div id="comments" class="block">
     <!-- Here will go the comments. -->
@@ -50,5 +49,11 @@
 </div>
 
 [[block page_scripts]]
+<script>
+<!--  added this-->
+  let load_messages_url = "[[=XML(load_messages_url)]]";
+  let add_messages_url = "[[=XML(add_messages_url)]]";
+<!--  added this-->
+</script>
 <script src="js/index.js"></script>
 [[end]]
