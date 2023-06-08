@@ -1,75 +1,105 @@
 [[extend 'layout.html']]
 
+<style>
+  [v-cloak] {
+       display: none;
+  }
 
-<div>
-  <p class="is-size-2 ml-5" style="display: inline-block">Available Drivers</p>
-  <a class="button is-primary" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; line-height: 30px; padding-right: 20px; padding-left: 20px; margin-left: 910px; margin-top: 10px;">LIST</a>
-  <a class="button is-primary" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; line-height: 20px; padding-right: 20px; padding-left: 20px; margin-top: 10px;">MAP</a>
-</div>
+  /* set size of map */
+  #map {
+    height: 1000px;
+    width: 100%;
+  }
 
-<div class="section">
-    <body>
-        <div class="field has-addons">
-          <div class="control">
-            <div class="select">
-              <select>
-                <option value="date">Select Date</option>
-                <option value="date">Sunday</option>
-                <option value="date">Monday</option>
-                <option value="date">Tuesday</option>
-                <option value="date">Wednesday</option>
-                <option value="date">Thursday</option>
-                <option value="date">Friday</option>
-                <option value="date">Saturday</option>
-              </select>
-            </div>
-          </div>
-          <div class="control">
-            <button class="button is-primary">Search</button>
-          </div>
-        </div>
-      </body>
+</style>
 
-
-      <body>
-        [[for i in results:]]
-        <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-64x64">
-                <img src="profileTemplate.jpg" alt="Profile Picture"> <!-- needs to be i[profilePic] -->
-              </figure>
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong>Full Name</strong>: [[=i["firstName"] + " " + i["lastName"]]]
-                </p>
-                <p>
-                  <strong>Location</strong>: [[=i["location"]]]
-                </p>
-                <p>
-                  <strong>Car Model</strong>: [[=i["carModel"]]]
-                </p>
-                <p>
-                  <strong>Car Make</strong>: [[=i["carMake"]]]
-                </p>
-                <p>
-                  <strong>Number of Seats</strong>: [[=i["numSeats"]]]
-                </p>
-                <p>
-                  <strong>Schedule</strong>: [[=i["schedule"]]]
-                </p>
-              </div>
-              <div class="control">
-                <a class="button is-primary" href="[[=URL('displayProfile', i['id'])]]">Full Bio</a>
-                <a class="button is-primary" href="[[=URL('message')]]">Message</a>
+<div class="section" id="vue-target" v-cloak>
+    <!-- list view -->
+    <div v-if="view == 'list'">
+      <p class="is-size-2" style="display: inline-block">Available Drivers</p>
+      <a class="button is-outlined" @click="viewChange('list')" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px; margin-left: 900px;">LIST</a>
+      <a class="button is-primary" @click="viewChange('map')" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px;">MAP</a>
+        <body>
+          <div class="field has-addons">
+            <div class="control">
+              <div class="select">
+                <select>
+                  <option value="date">Select Date</option>
+                  <option value="date">Sunday</option>
+                  <option value="date">Monday</option>
+                  <option value="date">Tuesday</option>
+                  <option value="date">Wednesday</option>
+                  <option value="date">Thursday</option>
+                  <option value="date">Friday</option>
+                  <option value="date">Saturday</option>
+                </select>
               </div>
             </div>
-          </article>
-        </div>
-        [[pass]]
-      </body>
+            <div class="control">
+              <button class="button is-primary">Search</button>
+            </div>
+          </div>
+        </body>
+  
+  
+        <body>
+          [[for i in results:]]
+          <div class="box">
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                  <img src="profileTemplate.jpg" alt="Profile Picture"> <!-- needs to be i[profilePic] -->
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong>Full Name</strong>: [[=i["firstName"] + " " + i["lastName"]]]
+                  </p>
+                  <p>
+                    <strong>Location</strong>: [[=i["location"]]]
+                  </p>
+                  <p>
+                    <strong>Car Model</strong>: [[=i["carModel"]]]
+                  </p>
+                  <p>
+                    <strong>Car Make</strong>: [[=i["carMake"]]]
+                  </p>
+                  <p>
+                    <strong>Number of Seats</strong>: [[=i["numSeats"]]]
+                  </p>
+                  <p>
+                    <strong>Schedule</strong>: [[=i["schedule"]]]
+                  </p>
+                </div>
+                <div class="control">
+                  <a class="button is-primary" href="[[=URL('displayProfile', i['id'])]]">Full Bio</a>
+                  <a class="button is-primary" href="[[=URL('message')]]">Message</a>
+                </div>
+              </div>
+            </article>
+          </div>
+          [[pass]]
+        </body>
+    </div>
+    <!-- list view end -->
+  
+    <!-- map view -->
+    <div v-else>
+      <p class="is-size-2" style="display: inline-block">Available Drivers</p>
+      <a class="button is-primary" @click="viewChange('list')" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px; margin-left: 900px;">LIST</a>
+      <a class="button is-outlined" @click="viewChange('map')" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px;">MAP</a>
+      <!-- display google map -->
+      <div id="map"></div>
+    </div>
 
-                  
 </div>
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+<script>
+  let my_callback_url = "[[=XML(my_callback_url)]]";
+</script>
+<script src="js/index.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChLO4FrJZ2B87Bbuo84k8e-ePktQX-d5s&callback=initMap&libraries=&v=weekly" async></script>
+[[end]]

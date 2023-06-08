@@ -52,7 +52,7 @@ def driver():
         if user['category'] == ("driver"):
             results.append(user)
 
-    return dict(results=results)
+    return dict(results=results, my_callback_url = URL('my_callback', signer=url_signer))
 
 # rider search
 @action("rider")
@@ -64,7 +64,7 @@ def rider():
         if user['category'] == ("rider"):
             results.append(user)
     
-    return dict(results=results)
+    return dict(results=results, my_callback_url = URL('my_callback', signer=url_signer))
 
 @action("profile")
 @action.uses(db, 'profile.html', auth)

@@ -12,6 +12,7 @@ let init = (app) => {
         // Complete as you see fit.
         comment_list: [],
         new_comment: "",
+        view: 'list',
     };
 
     app.enumerate = (a) => {
@@ -47,11 +48,34 @@ let init = (app) => {
 //    }
 //working
 
+    // initialize the map
+    app.initMap = function(){
+        // map location: Santa Cruz
+        const sc = { lat: 36.974117, lng: -122.030792 };
+        
+        // center the map on santa cruz
+        const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: sc,
+        });
+    };
+
+    // change the view from list to map or map to list
+    app.viewChange = function(view){
+        app.vue.view = view
+        if (app.vue.view == 'map'){
+            app.vue.$nextTick(() => {
+                app.initMap();
+            });
+        };
+    };
+
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
         add_comment: app.add_comment,
-
+        viewChange: app.viewChange,
+        initMap: app.initMap,
     };
 
     // This creates the Vue instance.
