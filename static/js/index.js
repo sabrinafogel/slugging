@@ -2,7 +2,6 @@
 // and be used to initialize it.
 let app = {};
 
-
 // Given an empty app object, initializes it filling its attributes,
 // creates a Vue instance, and then initializes the Vue instance.
 let init = (app) => {
@@ -12,7 +11,7 @@ let init = (app) => {
         // Complete as you see fit.
         comment_list: [],
         new_comment: "",
-        view: 'list',
+        view: 0,
     };
 
     app.enumerate = (a) => {
@@ -49,7 +48,7 @@ let init = (app) => {
 //working
 
     // initialize the map
-    app.initMap = function(){
+    app.initMap = function(view){
         // map location: Santa Cruz
         const sc = { lat: 36.974117, lng: -122.030792 };
         
@@ -58,14 +57,41 @@ let init = (app) => {
         zoom: 15,
         center: sc,
         });
+
+        // markers for drivers
+        if (view == 1){
+            const marker = new google.maps.Marker({
+                position: sc,
+                map: map,
+                label: {
+                    text: 'Driver Name',
+                    color: 'red',
+                    fontsize: '24px'
+
+                },
+                icon: {
+                    url: 'https://th.bing.com/th/id/R.45627b4df6c629e3a880121fe0143b17?rik=L7K%2bYZCvUNxlug&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fyio%2fM5B%2fyioM5BxBT.png&ehk=0MPKSrO21UJbumaqXsH5ULRE9erzktvhZ5DUxUELR4c%3d&risl=&pid=ImgRaw&r=0',
+                    scaledSize: new google.maps.Size(50, 50),
+                    labelOrigin: new google.maps.Point(25, -10)
+                }
+            });
+        }
+
+        // markers for riders
+        if (view == 2){
+            const marker = new google.maps.Marker({
+                position: sc,
+                map: map,
+            });
+        }
     };
 
     // change the view from list to map or map to list
     app.viewChange = function(view){
         app.vue.view = view
-        if (app.vue.view == 'map'){
+        if (app.vue.view > 0){
             app.vue.$nextTick(() => {
-                app.initMap();
+                app.initMap(view);
             });
         };
     };
