@@ -14,7 +14,7 @@
 
 <div class="section" id="vue-target" v-cloak>
   <div v-if="view == 0">
-    <p class="is-size-2" style="display: inline-block">Available Drivers</p>
+    <p class="is-size-2" style="display: inline-block">Available Riders</p>
     <a class="button is-outlined" @click="viewChange(0)" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px; margin-left: 900px;">LIST</a>
     <a class="button is-primary" @click="viewChange(2)" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px;">MAP</a>
     <body>
@@ -75,7 +75,7 @@
 
     <!-- map view -->
     <div v-else>
-      <p class="is-size-2" style="display: inline-block">Available Drivers</p>
+      <p class="is-size-2" style="display: inline-block">Available Riders</p>
       <a class="button is-primary" @click="viewChange(0)" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px; margin-left: 900px;">LIST</a>
       <a class="button is-outlined" @click="viewChange(2)" style="font-size: 25px; background-color: rgb(242, 152, 19); height: 50px; padding-right: 20px; padding-left: 20px;">MAP</a>
       <!-- display google map -->
