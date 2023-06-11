@@ -64,65 +64,58 @@
             </div>
           </div>
       </div>
+      
     </div>
-       
-    
+ 
 </div>
 
 
-    
-    
-
-
-
-
-<!--input form that will help edit the information in the user profile.-->
-
-       <div class= columns>
-           <div class="column is-two-thirds">
-               
-           </div>
-           
-           <div class="column is-one-third">
-               <table class="table">
-          
+<div class="section">
+  <div class="container is-mobile">
+  <div class="columns">
+    <div class="column is-one-quarter">
+    </div>
+    <section class="section">
+      <div class="container">
+        <div class="title">Schedule</div>
+        <table class="table is-striped is-fullwidth">
           <tr>
-               <!--insert form here-->
-           
-           <!--these are the buttons that will add and edit schedules, should schedules be its own database table?-->
-           
-              <td>
-                <a class="button is-success"  href="[[=URL('addSchedule',user_id)]]">
-                     <span class="icon "> <i class="fa fa-plus"></i>   </span>
-                     <span>Add Schedule</span>
+             <th>Monday</th>
+             <th>Tuesday</th>
+             <th>Wednesday</th>
+             <th>Thursday</th>
+             <th>Friday</th>
+             <th>Saturday</th>
+             <th>Sunday</th>
+             <th></th>
+          </tr>
+          [[for row in rows:]]
+          <tr>
+             <td>[[=row["monday"]]]</td>
+             <td>[[=row["tuesday"]]]</td>
+             <td>[[=row["wednesday"]]]</td>
+             <td>[[=row["thursday"]]]</td>
+             <td>[[=row["friday"]]]</td>
+             <td>[[=row["saturday"]]]</td>
+             <td>[[=row["sunday"]]]</td>
+             <td>
+                <a class="button is-warning" href="[[=URL('editSchedule', row.id, signer=url_signer)]]">
+                  <span class = "icon"><i class = "fa fa-fw fa-edit"></i></span>
+                  <span></span>
                 </a>
-            </td>
-        
-            <td>        
-                <a class="button is-warning" href="[[=URL('editSchedule',user_id)]]">
-                    <span class="icon"> <i class="fa fa-bars"></i></span>
-                     <span>Edit Schedule  </span>
-                 </a>
-            </td>
-            
-             <td>        
-                <a class="button is-primary" href="[[=URL('profile')]]">
-                    <span class="icon"><i class="fa fa-backward"></i> </span>
-                     <span> Back </span>
-                 </a>
-            </td>
-            
-            
-            </tr>
-
-              
-              </table>
-
-               
-           </div>
-       </div>
+             </td>
+          </tr>
+          [[pass]]
+       </table>     
+       <a class="button is-warning" href="[[=URL('addSchedule')]]">
+        <span class = "icon"><i class = "fa fa-plus"></i></span>
+        <span>Add Schedule</span>
+      </a> 
+      </div>
     
+    </section>
+    
+  </div>
+
 </div>
-
-
 

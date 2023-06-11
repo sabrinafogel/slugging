@@ -13,9 +13,6 @@
     padding: 20px; 
 }
 
-
-
-
 </style>
 
 
@@ -47,97 +44,11 @@
             <tr><td>[[=r["first_name"] + " " + r["last_name"]]] </td></tr>
                           
              <tr><td>  Rider</td></tr>
-             
-                              <!--Begining of Calendar-->
-              <tr>
-                <td>
-                  
-      
-    <table class="table">
-          
-     
-     
-        <thead>
- 
-            <tr>
-
-                <th>Time  Stamp</th>
-
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-
-            </tr>
-        </thead>
-          
-        <tbody>
-            <tr>
-                <td>8 am </td>
-                <td><button class="button is-success">Available</button></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <td>9 am</td>
-                <td></td>
-                <td><button class="button is-success">Available</button></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>10 am</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>11 am</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>12 pm</td>
-                <td><button class="button is-success">Available</button></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>1 pm</td>
-                <td><button class="button is-success">Available</button></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            
-             <tr>
-                <td>2 pm</td>
-                <td></td>
-                <td></td>
-                <td><button class="button is-success">Available</button></td>
-                <td></td>
-            </tr>
-            
-             <tr>
-                <td>3 pm</td>
-                <td></td>
-                <td><button class="button is-success">Available</button></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-                  
-                  </td>
-              </tr>
-             <!--end of calendar-->
+             <tr><td>  
+                <a class="button is-warning" href="[[=URL('schedule', r['id'] )]]">
+                    <span>View Schedule</span>
+                </a> 
+             </td></tr>
         
              
              <tr>
@@ -146,6 +57,7 @@
                         <span class="icon"> <i class="fa fa-bars"></i> </span>
                         <span>Edit</span>
                     </a> 
+                    
                 </td>
                 
                 <td>

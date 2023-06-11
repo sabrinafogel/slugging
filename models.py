@@ -118,3 +118,22 @@ def add_users_for_testing(num_users):
 
 #adds the amount of mock users, the value can always be changed 
 add_users_for_testing(50)
+
+#user schedule
+db.define_table(
+    'schedule',
+    Field('created_by', 'reference auth_user', default=lambda: auth.user_id, readable=False, writable=False),
+    Field('monday'),
+    Field('tuesday'),
+    Field('wednesday'),
+    Field('thursday'),
+    Field('friday'),
+    Field('saturday'),
+    Field('sunday'),
+    Field('user_email', default=get_user_email),
+)
+
+db.schedule.id.readable = False
+db.schedule.id.writable = False
+db.schedule.user_email.readable = db.schedule.user_email.writable =False
+

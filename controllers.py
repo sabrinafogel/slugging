@@ -81,8 +81,19 @@ def editProfile(user_id=None):
     a = db(db.auth_user.id == user_id).select().first()
     if form.accepted:
        redirect(URL('profile'))
+       
+    rows = db(db.schedule.user_email == get_user_email()).select()
     
-    return dict(account=a,form=form, user_id=user_id)
+    return dict(rows=rows, account=a,form=form, user_id=user_id, url_signer=url_signer)
+
+@action('schedule/<user_id:int>', method=["GET","POST"])
+@action.uses(db, session, url_signer, "schedule.html", auth)
+def schedule(user_id=None):
+    assert user_id is not None 
+       
+    rows = db(db.schedule.user_email == get_user_email()).select()
+    
+    return dict(rows=rows, user_id=user_id, url_signer=url_signer)
 
 
 @action('displayProfile/<id:int>', method=["GET","POST"])
@@ -96,26 +107,6 @@ def displayProfile(id=None):
     #
     return dict(profile=profile)
 
-@action('addSchedule/<user_id:int>' , method=["GET","POST"])
-@action.uses(db, "addSchedule.html", session, auth)
-def addSchedule(user_id=None):
-    assert user_id is not None
-    #get schedule for specific user 
-        #s = db(db.schedule.user_id = user_id)
-    form = Form([Field('day_of_week'), Field('available')], csrf_session=session,formstyle=FormStyleBulma)
-    if form.accepted:
-        #user_info = db(db.user.username == get_username()).select().first()
-        #assert user_info is not None
-        #db.schedule.insert(user_id=user_id, day_of_week=form.vars["Day of the Week"], available=form.vars["Time Available"])
-        redirect(URL('editProfile',user_id))
-        
-    return dict(form=form,  user_id=user_id)
-    
-@action('editSchedule/<user_id:int>' , method=["GET","POST"])
-@action.uses(db, "editSchedule.html", session, auth)
-def editSchedule(user_id=None):
-    assert user_id is not None
-    return dict()
 
 @action("message")
 @action.uses(db, 'message.html', auth)
@@ -140,6 +131,31 @@ def add_messages():
     )
     return dict(id=id)
 
+
+@action('addSchedule', method = ["GET", "POST"])
+@action.uses('addSchedule.html', db, auth)
+def addSchedule():
+    form = Form(db.schedule, csrf_session=session, formstyle=FormStyleBulma)
+    if form.accepted: 
+        redirect(URL('profile'))
+    return dict(form = form)
+
+
+@action('editSchedule/<schedule_id:int>', method=["GET", "POST"])
+@action.uses('editSchedule.html', db, session,  auth.user, url_signer.verify(), url_signer)
+def editSchedule(schedule_id = None):
+    assert schedule_id is not None
+    p = db.schedule[schedule_id]
+    
+    if p is None:
+        redirect(URL('profile'))
+        
+    form = Form(db.schedule, record = p, csrf_session=session, formstyle=FormStyleBulma)
+    
+    if form.accepted:
+        redirect(URL('profile'))
+        
+    return dict(form=form)
 
 
 
