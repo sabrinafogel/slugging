@@ -56,11 +56,9 @@ db.define_table('user_message',
 
 db.commit()
 
-
-
-locationList = ["Porter", "College 9", "Kresge", "College 10", "Stevenson",
-"Merril", "Crown", "Cowell", "Nobel", "Escalona", "Downtown", "Natural Bridges", 
-"WatsonVille", "Seabright", "Capitola", "Ocean st", "Soquel", "Scotts Valley"]
+locationList = [("Porter", 36, 122), ("College 9", 37.0015833, -122.0572618), ("Kresge", 36.9979, -122.06595), ("College 10", 37.000860, -122.058100), ("Stevenson", 36.997695, -122.052059),
+("Merril", 37.00030, -122.05291), ("Crown", 37.000461, -122.054731), ("Cowell", 36.996950, -122.053894), ("Nobel", 36.975479, -122.054101), ("Escalona", 36.970805, -122.044747), ("Downtown", 36.972641, -122.025816), ("Natural Bridges", 36.9524511, -122.0574637), 
+("WatsonVille", 36.910233, -121.756897), ("Seabright", 36.9632839, -122.0080175), ("Capitola", 36.98, -121.95), ("Ocean st", 36.97176, -122.01761), ("Soquel", 36.988327, -121.956696), ("Scotts Valley", 37.0508, -122.0080)]
 
 model = ["Ford F150", "Ford F350", "Honda Civic", "Honda Accord", "Honda CRV",
 "Toyota Supra", "Toyota Corolla", "Toyota Camry", "Toyota Prius", "Subaru WRX", 

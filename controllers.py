@@ -52,7 +52,11 @@ def driver():
         if user['category'] == ("driver"):
             results.append(user)
 
-    return dict(results=results, my_callback_url = URL('my_callback', signer=url_signer))
+    # to get all the data needed to place markers
+    markerList = [row for row in db().select(db.user.firstName, db.user.lastName, db.user.category, db.user.location)]
+    print(markerList)
+
+    return dict(results=results, markerList=markerList, driverURL = URL('driver'))
 
 # rider search
 @action("rider")
@@ -64,7 +68,7 @@ def rider():
         if user['category'] == ("rider"):
             results.append(user)
     
-    return dict(results=results, my_callback_url = URL('my_callback', signer=url_signer))
+    return dict(results=results, riderURL = URL('rider'))
 
 @action("profile")
 @action.uses(db, 'profile.html', auth)

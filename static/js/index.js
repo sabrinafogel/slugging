@@ -12,6 +12,8 @@ let init = (app) => {
         comment_list: [],
         new_comment: "",
         view: 0,
+
+        markerData: [],
     };
 
     app.enumerate = (a) => {
@@ -58,32 +60,61 @@ let init = (app) => {
         center: sc,
         });
 
-        // markers for drivers
-        if (view == 1){
-            const marker = new google.maps.Marker({
-                position: sc,
-                map: map,
-                label: {
-                    text: 'Driver Name',
-                    color: 'red',
-                    fontsize: '24px'
+        // get the database lat and long for markers
+        axios.get(driverURL)
+            .then(function (response){
+                app.vue.markerData = response.data.markerList;
+                
+                // for bug testing
+                console.log(response.data.markerList);
+                console.log(app.vue.markerData);
 
-                },
-                icon: {
-                    url: 'https://th.bing.com/th/id/R.45627b4df6c629e3a880121fe0143b17?rik=L7K%2bYZCvUNxlug&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fyio%2fM5B%2fyioM5BxBT.png&ehk=0MPKSrO21UJbumaqXsH5ULRE9erzktvhZ5DUxUELR4c%3d&risl=&pid=ImgRaw&r=0',
-                    scaledSize: new google.maps.Size(50, 50),
-                    labelOrigin: new google.maps.Point(25, -10)
+                // markers for drivers
+                if (view == 1){
+                    for (let i = 0; i < app.vue.markerData.length; i++) {
+                        let user = app.vue.markerData[i];
+                        if (user.category == "driver") {
+                            const marker = new google.maps.Marker({
+                                position: {lat: user.location[1], lng: user.location[2]},
+                                map: map,
+                                label: {
+                                    text: user.firstName + " " + user.lastName,
+                                    color: 'red',
+                                    fontsize: '24px'
+                                },
+                                icon: {
+                                    url: 'https://th.bing.com/th/id/R.45627b4df6c629e3a880121fe0143b17?rik=L7K%2bYZCvUNxlug&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fyio%2fM5B%2fyioM5BxBT.png&ehk=0MPKSrO21UJbumaqXsH5ULRE9erzktvhZ5DUxUELR4c%3d&risl=&pid=ImgRaw&r=0',
+                                    scaledSize: new google.maps.Size(50, 50),
+                                    labelOrigin: new google.maps.Point(25, -10)
+                                }
+                            });
+                        }
+                    }
+                }
+
+                // markers for riders
+                if (view == 2){
+                    for (let i = 0; i < markerList.length; i++) {
+                        let user = markerList[i];
+                        if (user.category == "rider") {
+                            const marker = new google.maps.Marker({
+                                position: {lat: user.location[1], lng: user.location[2]},
+                                map: map,
+                                label: {
+                                    text: user.firstName + " " + user.lastName,
+                                    color: 'red',
+                                    fontsize: '24px'
+                                },
+                                icon: {
+                                    url: 'https://th.bing.com/th/id/OIP.AtdqxcU3grBhlv6OgXH5hwHaHa?w=219&h=219&c=7&r=0&o=5&dpr=2&pid=1.7',
+                                    scaledSize: new google.maps.Size(50, 50),
+                                    labelOrigin: new google.maps.Point(25, -10)
+                                }
+                            });
+                        }
+                    }
                 }
             });
-        }
-
-        // markers for riders
-        if (view == 2){
-            const marker = new google.maps.Marker({
-                position: sc,
-                map: map,
-            });
-        }
     };
 
     // change the view from list to map or map to list
