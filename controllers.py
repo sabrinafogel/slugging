@@ -128,10 +128,16 @@ def load_messages():
     return dict(comment_list=comment_list)
 
 @action("add_messages", method="POST")
-@action.uses(url_signer.verify(),db)
+@action.uses(url_signer.verify(),db,auth)
 def add_messages():
+
+    # Get the logged-in user's username
+    username = get_user_email() #new
+
     id = db.user_message.insert(
-       text=request.json.get('text')
+        user_id=auth.current_user.get('id'),  # NEW Store the user's ID instead of email
+        username=username,  # NEW Store the username
+        text=request.json.get('text')
     )
     return dict(id=id)
 
