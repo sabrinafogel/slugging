@@ -120,7 +120,11 @@ def profile():
 @action("load_messages")
 @action.uses(url_signer.verify(), db)
 def load_messages():
-    comment_list = db(db.user_message).select().as_list()
+    # Retrieve the logged-in user's ID
+    user_id = auth.current_user.get('id') #new
+
+    # comment_list = db(db.user_message).select().as_list()
+    comment_list = db(db.user_message.user_id == user_id).select().as_list()
     return dict(comment_list=comment_list)
 
 @action("add_messages", method="POST")
