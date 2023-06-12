@@ -51,6 +51,7 @@ db.define_table(
 #just added messages table
 db.define_table('user_message',
     Field('user_id', 'reference auth_user'),
+    # Field('username', 'string'), #new
     Field('text', 'text')
 )
 
