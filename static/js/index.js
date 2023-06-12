@@ -36,6 +36,7 @@ let init = (app) => {
               text: app.vue.new_comment,
           });
           app.enumerate(app.vue.comment_list);
+          app.vue.new_comment = ""; // Clear the new comment input field
          });
       };
 
