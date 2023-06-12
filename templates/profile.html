@@ -44,12 +44,87 @@
             <tr><td>[[=r["first_name"] + " " + r["last_name"]]] </td></tr>
                           
              <tr><td>  Rider</td></tr>
-             <tr><td>  
-                <a class="button is-warning" href="[[=URL('schedule', r['id'] )]]">
-                    <span>View Availability</span>
-                </a> 
-             </td></tr>
-        
+             
+             [[for s in schedule:]]
+          <tr>
+             [[if s["monday"] : ]]
+             <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["monday"]]]</span>
+                    </a> 
+             </td>
+
+             [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["tuesday"] : ]]
+                 <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["tuesday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["wednesday"] : ]]
+                 <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["wednesday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["thursday"] : ]]
+                 <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["thursday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["friday"] : ]]
+                <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["friday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["saturday"] : ]]
+                <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["saturday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["sunday"] : ]]
+                <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["sunday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+             
+          
+             
+          </tr>
+          [[pass]]
+                 </table>
+             </td>    
+             </tr>
              
              <tr>
                   <td>
