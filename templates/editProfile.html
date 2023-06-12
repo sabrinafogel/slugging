@@ -29,26 +29,42 @@
           <div class="field">
             <label class="label"> First Name </label>      
             <div class="control"><input class="input" type="text" placeholder="[[=account.first_name]]"></div>    
-
-            <label class="label"> Last Name </label>      
-            <div class="control"><input class="input" type="text" placeholder="[[=account.last_name]]"></div>   
             
-            <label class="label"> Location </label>      
-            <div class="control"><input class="input" type="text" placeholder="Location"></div>
+                       </div>
             
-            <label class="label">Category </label>    
-            <div class="control">
-              <label class="radio"><input type="radio" name="question">Driver</label>
-              <label class="radio"><input type="radio" name="question">Rider</label>
+            <div class ="field">
+                <label class="label"> Last Name </label>      
+            <div class="control"><input class="input" type="text" placeholder="[[=account.last_name]]"></div>       
             </div>
+
+            <div class="field">
+                <label class="label"> Location </label>      
+            <div class="control"><input class="input" type="text" placeholder="Location"></div>
+            </div>
+            
+            
+            
+           <div class="field">
+                <label class="label">Category </label>    
+            <div class="control">
+              <label class="radio"><input type="radio" name="question"> Driver </label>
+              <label class="radio"><input type="radio" name="question"> Rider </label>
+            </div>
+           </div>
           
-            <label class="label"> Car Make </label>      
+          <div class="field">
+                <label class="label"> Car Make </label>      
             <div class="control"><input class="input" type="text" placeholder="e.g Kia"></div>
 
-            <label class="label"> Car Model </label>      
+          </div>
+          
+           <div class = "field">
+                <label class="label"> Car Model </label>      
             <div class="control"><input class="input" type="text" placeholder="e.g Sorento"> </div>
+           </div>
 
-            <label class="label">Number of Seats</label>
+           <div class="field">
+                <label class="label">Number of Seats</label>
             <div class="control">
               <div class="select">
                 <select>
@@ -62,22 +78,14 @@
                 </select>
               </div>
             </div>
+            
           </div>
-      </div>
-      
-    </div>
+
+          
  
-</div>
 
-
-<div class="section">
-  <div class="container is-mobile">
-  <div class="columns">
-    <div class="column is-one-quarter">
-    </div>
-    <section class="section">
-      <div class="container">
-        <div class="title">Availability</div>
+       <div class="block">
+            <div class="title">Availability</div>
         <table class="table is-striped is-fullwidth">
           <tr>
              <th>Monday</th>
@@ -111,11 +119,32 @@
         <span class = "icon"><i class = "fa fa-plus"></i></span>
         <span>Add Availability</span>
       </a> 
-      </div>
-    
-    </section>
-    
-  </div>
+       </div>
 
-</div>
+      <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-link">Submit</button>
+    </div>
+     <div class="control">
+        <button class="button is-primary"  href="[[=URL('index')]]">
+         <span class="icon"><i class="fa fa-backward"></i> </span>
+                     <span> Back </span>
 
+        </button>
+    </div>
+    
+ </div>   
+  
+        
+      </div> <!--end of column-->>
+      
+
+      
+    </div> <!--end of columns-->
+    
+ 
+</div> <!--end of containers-->
+
+
+
+</div> <!--end of section-->
