@@ -128,8 +128,21 @@ def load_messages():
     # Retrieve the logged-in user's ID
     user_id = auth.current_user.get('id') #new
 
+    # Get the user's username and profile picture
+    # user = db.auth_user[user_id]
+
+    username = get_user_email() #new
+
+    # username = auth.current_user.get('username') #new
+
     # comment_list = db(db.user_message).select().as_list()
     comment_list = db(db.user_message.user_id == user_id).select().as_list()
+
+    # Add username and profile picture to each message
+    for comment in comment_list:
+        comment['username'] = username#new
+
+
     return dict(comment_list=comment_list)
 
 @action("add_messages", method="POST")
