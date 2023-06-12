@@ -45,7 +45,21 @@
                           
              <tr><td>  Rider</td></tr>
              
-             [[for s in schedule:]]
+               <tr>
+             <td>
+            <table >
+            <tr>
+             <th>Monday</th>
+             <th>Tuesday</th>
+             <th>Wednesday</th>
+             <th>Thursday</th>
+             <th>Friday</th>
+             <th>Saturday</th>
+             <th>Sunday</th>
+             <th></th>
+          </tr>
+            
+            [[for s in schedule:]]
           <tr>
              [[if s["monday"] : ]]
              <td>
@@ -133,9 +147,7 @@
                         <span>Edit</span>
                     </a> 
                     
-                </td>
-                
-                <td>
+               
                      <a class="button is-primary" href="[[=URL('index')]]">
                     <span class="icon"><i class="fa fa-backward"></i> </span>
                      <span> Back </span>
