@@ -24,6 +24,11 @@
   padding: 10px;
   margin-bottom: 10px;
   width: fit-content;
+
+  .username{
+      font-weight:bold;
+      margin-right: 5px;
+  }
 }
 </style>
 
@@ -33,6 +38,7 @@
     <!-- Here will go the comments. -->
     <div v-for="c in comment_list" class="block">
       <div class="message-body" :class="{'is-pulled-right': c.alignRight}">
+        <span class="username">{{ c.username }}:</span>
         {{c.text}}
       </div>
     </div>
@@ -41,7 +47,7 @@
   <div class="block" style= "position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">
     <div class="field is-grouped">
       <p class="control is-expanded">
-        <input class="input" type="text" v-model="new_comment" style="width: 90vw;" />
+        <input class="input" type="text" v-model="new_comment" style="width: 90vw;" @keyup.enter="add_comment"/>
       </p>
     </div>
     <button class="button is-primary" @click="add_comment" >Send Message</button>
