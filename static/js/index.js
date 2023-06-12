@@ -34,6 +34,7 @@ let init = (app) => {
           app.vue.comment_list.push({
               id:response.data.id,
               text: app.vue.new_comment,
+              username: response.data.username // Add the username (email) to the comment - new
           });
           app.enumerate(app.vue.comment_list);
           app.vue.new_comment = ""; // Clear the new comment input field
