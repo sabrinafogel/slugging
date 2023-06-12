@@ -74,7 +74,8 @@ def rider():
 @action.uses(db, 'profile.html', auth)
 def profile():
     rows = db(db.auth_user.email == get_user_email() ).select().as_list()
-    return dict(rows=rows)
+    schedule = db(db.schedule.user_email == get_user_email()).select()
+    return dict(rows=rows, schedule=schedule)
 
 
 @action('editProfile/<user_id:int>', method=["GET","POST"])
