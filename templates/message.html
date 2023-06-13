@@ -46,10 +46,17 @@
 }
 
 /* css settings for profile pic */
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .avatar {
     vertical-align: middle;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     padding: 20px; 
 }
@@ -60,19 +67,24 @@
 <div class="section" id="vue-target">
   <!-- display the name of the person you are dming, also a back button and more info button -->
   [[for p in profile:]]
+
+
     <div>
-      <button class="button is-size-5" onclick="window.history.back()">
+      <button class="button is-size-6" onclick="window.history.back()">
         <span class="icon">
             <i class="fas fa-arrow-left"></i>
         </span>
         <span>Back</span>
       </button>
-      <!-- [[=p["profilePic"]]] -->
-      <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
 
       <a class="info-button is-pulled-right is-size-4 mt-2" href="[[=URL('displayProfile', p['id'])]]">i</a>
 
-      <h1 class="title is-2 has-text-centered">[[=p["firstName"] + " " + p["lastName"]]]</h1>
+        <div class="center">
+          <!-- [[=p["profilePic"]]] -->
+          <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
+        </div>
+
+      <h1 class="title is-3 has-text-centered">[[=p["firstName"] + " " + p["lastName"]]]</h1>
 
     </div>
   [[pass]]
