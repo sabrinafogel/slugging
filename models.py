@@ -113,9 +113,53 @@ def add_users_for_testing(num_users):
        
        
     db.commit()
+
+# def addUsersForTesting(num_users):
+#     # Test user names begin with "_".
+#     # Counts how many users we need to add.
+#     db(db.auth_user.username.startswith("_")).delete()
+#     num_test_users = db(db.auth_user.username.startswith("_")).count()
+#     num_new_users = num_users - num_test_users
+#     print("Adding", num_new_users, "users.")
+#     for k in range(num_test_users, num_users):
+#         first_name = random.choice(FIRST_NAMES)
+#         last_name = random.choice(LAST_NAMES)
+#         username = "_%s%.2i" % (first_name.lower(), k)
+#         category = random.choice(["rider", "driver"])
+#         numSeats = random.randint(2,5)
+#         carModel = random.choice(model)
+#         carMake = random.randint(2000,2022)
+#         location = random.choice(locationList)
+#         user_info = dict(
+#             username=username,
+#             #email=username + "@ucsc.edu",
+#             firstName=first_name,
+#             lastName=last_name,
+#             password=username,  # To facilitate testing.
+#             category=category,
+#             numSeats=numSeats,
+#             carModel=carModel,
+#             carMake=carMake,
+#             location=location
+#         )
+#         #auth.register(user_info, send=False)
+#         # Adds some content for each user.
+#         db.auth_user.insert(**user_info)
+#     users = db(db.auth_user).select()
+#     for u in users:
+#         user_schedule = dict(
+#         user_id = u.id,
+#         day_of_week = random.choice(days_of_week),
+#         available_time = random.choice(r_times)  
+#         )
+#         db.user_schedule.insert(**user_schedule) 
+       
+       
+#     db.commit()
     
 
 #adds the amount of mock users, the value can always be changed 
+# addUsersForTesting(10)
 add_users_for_testing(50)
 
 #user schedule
