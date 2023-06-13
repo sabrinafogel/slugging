@@ -125,7 +125,9 @@ def message(id = None):
     # rows = db(db.user.id == auth.user_id).select().as_list()
     # return dict(rows=rows)
     return dict(profile=profile, load_messages_url = URL('load_messages', signer=url_signer),
-                add_messages_url = URL('add_messages', signer=url_signer)) #just added
+                add_messages_url = URL('add_messages', signer=url_signer),
+                getUserURL = URL('getUser'),
+) #just added
 
 # This is our first message API function
 @action("load_messages")
@@ -156,7 +158,9 @@ def load_messages():
     otherUserId = int(id)
 
     # get messages based on logged in user id and the user you are messaging
-    comment_list = [row for row in db((db.user_message.user_id == auth.user.id) | (db.user_message.otherUserID == otherUserId)).select(db.user_message.user_id, db.user_message.text, db.user_message.timestamp, orderby=~db.user_message.timestamp)]
+    # comment_list = [row for row in db((db.user_message.user_id == user_id) | (db.user_message.otherUserID == otherUserId)).select(db.user_message.user_id, db.user_message.text, db.user_message.timestamp, orderby=~db.user_message.timestamp)]
+
+    comment_list = [row for row in db(db.user_message.user_id == user_id).select(db.user_message.user_id, db.user_message.timestamp, db.user_message.text, orderby=db.user_message.timestamp)]
 
     return dict(comment_list=comment_list)
 
@@ -203,5 +207,11 @@ def editSchedule(schedule_id = None):
         
     return dict(form=form)
 
+@action("getUser", method="POST")
+@action.uses(db, auth.user)
+def getUser():
+    # get the user id being messaged
+    id = request.json.get('id')
 
+    return dict(id=id)
 

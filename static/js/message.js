@@ -24,6 +24,24 @@ let init = (app) => {
         return a;
     };
 
+    // app.add_comment = function(){
+    // //   app.vue.comment_list.push(app.vue.new_comment);
+    // //   app.vue.new_comment = "";
+    //      axios.post(add_messages_url,
+    //      {
+    //        text: app.vue.new_comment
+    //     //   alignRight: false// Set alignRight to true for right-aligned messages
+    //      }).then(function(response){
+    //       app.vue.comment_list.push({
+    //           id:response.data.id,
+    //           text: app.vue.new_comment,
+    //           username: response.data.username // Add the username (email) to the comment - new
+    //       });
+    //       app.enumerate(app.vue.comment_list);
+    //       app.vue.new_comment = ""; // Clear the new comment input field
+    //      });
+    //   };
+
     // set user id that you are messaging
     app.getUser = function (otherUserID) {
         app.vue.otherUserID = otherUserID
@@ -40,6 +58,40 @@ let init = (app) => {
             app.load_messages();
         }, 200);
     };
+
+    // user add message and it gets sent to controller to be stored in DB
+    app.add_comment = function () {
+        // send the new comment to controller to be added to the db
+        axios.post(add_messages_url, {text: app.vue.new_comment})
+        
+        // clear the type bar
+        app.vue.new_comment = "";
+        
+        // refresh
+        app.load_messages();
+        setTimeout(function() {
+            app.load_messages();
+        }, 200);
+    };
+
+    // refresh messages, controller makes db query again and vue refreshes the page
+    app.load_messages = function () {
+        // console.log(app.vue.otherUserID);
+
+        axios.get(load_messages_url, {params: {id: app.vue.otherUserID}})
+        .then(function (result) {
+            app.vue.comment_list = result.data.comment_list;
+        });
+    };
+
+// working
+//         app.vue.comment_list.push({
+//         text: app.vue.new_comment,
+//         alignRight: false// Set alignRight to true for right-aligned messages
+//         });
+//         app.vue.new_comment = "";
+//    }
+// working
 
     // initialize the map
     app.initMap = function(view){
@@ -122,9 +174,11 @@ let init = (app) => {
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
+        add_comment: app.add_comment,
         viewChange: app.viewChange,
         initMap: app.initMap,
         getUser: app.getUser,
+        load_messages: app.load_messages
     };
 
     // This creates the Vue instance.
@@ -138,6 +192,8 @@ let init = (app) => {
     app.init = () => {
         // Put here any initialization code.
         // Typically this is a server GET call to load the data.
+        app.load_messages()
+
     };
 
     // Call to the initializer.
