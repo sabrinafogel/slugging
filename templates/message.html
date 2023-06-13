@@ -61,33 +61,46 @@
     padding: 20px; 
 }
 
+/* line divider  */
+.divider {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  margin-bottom: 50px;
+  margin-top: 10px;
+}
+
 </style>
 
 
 <div class="section" id="vue-target">
   <!-- display the name of the person you are dming, also a back button and more info button -->
   [[for p in profile:]]
-
-
     <div>
+      <!-- back button -->
       <button class="button is-size-6" onclick="window.history.back()">
         <span class="icon">
             <i class="fas fa-arrow-left"></i>
         </span>
-        <span>Back</span>
       </button>
 
+      <!-- info button -->
       <a class="info-button is-pulled-right is-size-4 mt-2" href="[[=URL('displayProfile', p['id'])]]">i</a>
-
+      
+      <!-- profile pic -->
         <div class="center">
           <!-- [[=p["profilePic"]]] -->
           <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
         </div>
 
+      <!-- name -->
       <h1 class="title is-3 has-text-centered">[[=p["firstName"] + " " + p["lastName"]]]</h1>
 
     </div>
   [[pass]]
+
+  <div class="divider"></div>
 
   <div id="comments" class="block">
     <!-- Here will go the comments. -->
