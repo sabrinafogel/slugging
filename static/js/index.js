@@ -24,23 +24,6 @@ let init = (app) => {
         return a;
     };
 
-    // set user id that you are messaging
-    app.getUser = function (otherUserID) {
-        app.vue.otherUserID = otherUserID
-
-        // user id you are messaging
-        // axios.post(getUserURL, { id: app.vue.otherUserID })
-        // .then(function (result) {
- 
-        // });
-
-        // refresh after user id is set
-        app.load_messages();
-        setTimeout(function() {
-            app.load_messages();
-        }, 200);
-    };
-
     // initialize the map
     app.initMap = function(view){
         // map location: Santa Cruz
@@ -117,6 +100,18 @@ let init = (app) => {
                 app.initMap(view);
             });
         };
+    };
+
+    // set user id that you are messaging
+    app.getUser = function (otherUserID) {
+        app.vue.otherUserID = otherUserID
+        console.log(app.vue.otherUserID);
+
+        // send user id you are messaging
+        axios.post(getUserURL, { id: app.vue.otherUserID })
+        .then(function (result) {
+ 
+        });
     };
 
     // This contains all the methods.

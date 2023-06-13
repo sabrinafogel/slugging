@@ -111,15 +111,18 @@
 </div>
 
 <div class="section" id="vue-target">
+
   <!-- dm section -->
   <div id="comments" class="block">
     <!-- Here will go the comments. -->
     <div v-for="c in comment_list" class="block">
 
-      <p class="control" v-if="c.otherUserID == otherUserID">
+      <!-- if message is from other user, display left -->
+      <p class="control" v-if="c.user_id == otherUserID">
         <span class="username">{{c.text}}</span>
       </p>
 
+      <!-- else, message is from logged in user, display right -->
       <p class="control" v-else>
         <div class="message-body" :class="{'is-pulled-right': c.alignRight}">
           <span class="username">{{c.text}}</span>
@@ -128,24 +131,24 @@
 
     </div>
   </div>
-
+  [[for p in profile:]]
   <div class="block" style= "position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">
     <div class="field is-grouped">
       <p class="control is-expanded">
-        <input class="input" type="text" v-model="new_comment" style="width: 90vw;" @keyup.enter="add_comment"/>
+        <input class="input" type="text" v-model="new_comment" style="width: 90vw;"/>
+        <!-- <input class="input" type="text" v-model="new_comment" style="width: 90vw;" @focus="getUser([[=p['id']]])"/> -->
       </p>
     </div>
-    <button class="button is-primary" @click="add_comment">Send Message</button>
+    <button class="button is-primary is-pulled-right" @click="add_comment">Send Message</button>
   </div>
 </div>
+[[pass]]
 
 [[block page_scripts]]
 <script>
-  // add this
   let load_messages_url = "[[=XML(load_messages_url)]]";
   let add_messages_url = "[[=XML(add_messages_url)]]";
-  let setUserURL ="[[=XML(getUserURL)]]";
-  // add this
+  let getUserURL ="[[=XML(getUserURL)]]";
 </script>
 <script src="js/message.js"></script>
 [[end]]

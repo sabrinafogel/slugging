@@ -61,6 +61,13 @@ db.define_table('user_message',
     Field('timestamp')
 )
 
+#just added messages table
+db.define_table('tempID',
+    Field('id'),
+)
+
+# db.executesql('DELETE FROM user_message;')
+
 db.commit()
 
 locationList = [("Porter", 36, 122), ("College 9", 37.0015833, -122.0572618), ("Kresge", 36.9979, -122.06595), ("College 10", 37.000860, -122.058100), ("Stevenson", 36.997695, -122.052059),
