@@ -14,6 +14,7 @@ let init = (app) => {
         view: 0,
 
         markerData: [],
+        otherUserID: 0,
     };
 
     app.enumerate = (a) => {
@@ -23,23 +24,47 @@ let init = (app) => {
         return a;
     };
 
-    app.add_comment = function(){
-    //   app.vue.comment_list.push(app.vue.new_comment);
-    //   app.vue.new_comment = "";
-         axios.post(add_messages_url,
-         {
-           text: app.vue.new_comment
-        //   alignRight: false// Set alignRight to true for right-aligned messages
-         }).then(function(response){
-          app.vue.comment_list.push({
-              id:response.data.id,
-              text: app.vue.new_comment,
-              username: response.data.username // Add the username (email) to the comment - new
-          });
-          app.enumerate(app.vue.comment_list);
-          app.vue.new_comment = ""; // Clear the new comment input field
-         });
-      };
+    // app.add_comment = function(){
+    // //   app.vue.comment_list.push(app.vue.new_comment);
+    // //   app.vue.new_comment = "";
+    //      axios.post(add_messages_url,
+    //      {
+    //        text: app.vue.new_comment
+    //     //   alignRight: false// Set alignRight to true for right-aligned messages
+    //      }).then(function(response){
+    //       app.vue.comment_list.push({
+    //           id:response.data.id,
+    //           text: app.vue.new_comment,
+    //           username: response.data.username // Add the username (email) to the comment - new
+    //       });
+    //       app.enumerate(app.vue.comment_list);
+    //       app.vue.new_comment = ""; // Clear the new comment input field
+    //      });
+    //   };
+
+    // user add message and it gets sent to controller to be stored in DB
+    app.add_comment = function () {
+
+        // send the new comment to controller to be added to the meows db
+        axios.post(add_messages_url, {newComment: app.vue.new_comment})
+        
+        // clear the type bar
+        app.vue.new_comment = "";
+        
+        // refresh
+        app.load_messages(app.vue.otherUserID);
+        setTimeout(function() {
+            app.load_messages(app.vue.otherUserID);
+        }, 200);
+    };
+
+    // refresh messages, controller makes db query again and vue refreshes the page
+    app.load_messages = function (otherUserID) {
+        axios.get(getMeowsURL, {params: {id: otherUserID}})
+        .then(function (result) {
+            app.vue.comment_list = result.data.comment_list;
+        });
+    };
 
 
 // working

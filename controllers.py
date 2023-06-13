@@ -30,7 +30,7 @@ from yatl.helpers import A
 from py4web.utils.form import Form, FormStyleBulma
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
-from .models import get_user_email
+from .models import get_user_email, get_time
 
 url_signer = URLSigner(session)
 
@@ -129,7 +129,7 @@ def message(id = None):
 
 # This is our first message API function
 @action("load_messages")
-@action.uses(url_signer.verify(), db)
+@action.uses(url_signer.verify(), db, auth.user)
 def load_messages():
     # Retrieve the logged-in user's ID
     user_id = auth.current_user.get('id') #new
@@ -137,34 +137,46 @@ def load_messages():
     # Get the user's username and profile picture
     # user = db.auth_user[user_id]
 
-    username = get_user_email() #new
+    # username = get_user_email() #new
 
     # username = auth.current_user.get('username') #new
 
     # comment_list = db(db.user_message).select().as_list()
-    comment_list = db(db.user_message.user_id == user_id).select().as_list()
+    # comment_list = db(db.user_message.user_id == user_id).select().as_list()
+
+    # get all message from logged in user and the user you are messaging
+    # comment_list = db(db.user_message.user_id == user_id).select().as_list()
 
     # Add username and profile picture to each message
-    for comment in comment_list:
-        comment['username'] = username#new
+    # for comment in comment_list:
+    #     comment['username'] = username#new
 
+    # get the user of the id we are messaging
+    id = request.query.get('id')
+    otherUserId = int(id)
+
+    # get messages based on logged in user id and the user you are messaging
+    comment_list = [row for row in db((db.user_message.user_id == auth.user.id) | (db.user_message.otherUserID == otherUserId)).select(db.user_message.user_id, db.user_message.text, db.user_message.timestamp, orderby=~db.user_message.timestamp)]
 
     return dict(comment_list=comment_list)
 
 @action("add_messages", method="POST")
-@action.uses(url_signer.verify(),db,auth)
+@action.uses(url_signer.verify(), db, auth)
 def add_messages():
+    message = request.json.get('text')
 
     # Get the logged-in user's username
-    username = get_user_email() #new
+    # username = get_user_email() #new
 
-    id = db.user_message.insert(
-        user_id=auth.current_user.get('id'),  # NEW Store the user's ID instead of email
-        username=username,  # NEW Store the username
-        text=request.json.get('text')
+    isoTime = get_time().isoformat()
+
+    db.user_message.insert(
+        user_id = auth.current_user.get('id'),  # NEW Store the user's ID instead of email
+        # username=username,  # NEW Store the username
+        timestamp = isoTime,
+        text = message
     )
-    return dict(id=id)
-
+    db.commit()
 
 @action('addSchedule', method = ["GET", "POST"])
 @action.uses('addSchedule.html', db, auth)

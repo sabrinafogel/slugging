@@ -52,7 +52,13 @@ db.define_table(
 db.define_table('user_message',
     Field('user_id', 'reference auth_user'),
     # Field('username', 'string'), #new
-    Field('text', 'text')
+    Field('text', 'text'),
+
+    # store the user id of the user you are messaging
+    Field('otherUserID'),
+
+    # store timestamp for sorting display 
+    Field('timestamp')
 )
 
 db.commit()
