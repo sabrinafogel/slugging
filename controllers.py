@@ -100,7 +100,6 @@ def schedule(user_id=None):
     
     return dict(rows=rows, user_id=user_id, url_signer=url_signer)
 
-
 @action('displayProfile/<id:int>', method=["GET","POST"])
 @action.uses(db, "displayProfile.html", auth)
 def displayProfile(id=None):
@@ -112,12 +111,18 @@ def displayProfile(id=None):
     #
     return dict(profile=profile)
 
-@action("message")
+# each message form is the id of the user you are messaging
+@action('message/<id:int>')
 @action.uses(db, 'message.html', auth, url_signer, auth.user, url_signer.verify())
-def message():
+def message(id = None):
+    assert id is not None
+
+    # get the info of the user i am messaging so that i can pass it to the message form for use
+    profile = db(db.user.id == id).select().as_list()
+
     # rows = db(db.user.id == auth.user_id).select().as_list()
     # return dict(rows=rows)
-    return dict(load_messages_url = URL('load_messages', signer=url_signer),
+    return dict(profile=profile, load_messages_url = URL('load_messages', signer=url_signer),
                 add_messages_url = URL('add_messages', signer=url_signer)) #just added
 
 # This is our first message API function

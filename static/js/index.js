@@ -24,12 +24,12 @@ let init = (app) => {
     };
 
     app.add_comment = function(){
-//       app.vue.comment_list.push(app.vue.new_comment);
-//       app.vue.new_comment = "";
+    //   app.vue.comment_list.push(app.vue.new_comment);
+    //   app.vue.new_comment = "";
          axios.post(add_messages_url,
          {
            text: app.vue.new_comment
-//           alignRight: false// Set alignRight to true for right-aligned messages
+        //   alignRight: false// Set alignRight to true for right-aligned messages
          }).then(function(response){
           app.vue.comment_list.push({
               id:response.data.id,
@@ -42,14 +42,14 @@ let init = (app) => {
       };
 
 
-//working
+// working
 //         app.vue.comment_list.push({
 //         text: app.vue.new_comment,
 //         alignRight: false// Set alignRight to true for right-aligned messages
 //         });
 //         app.vue.new_comment = "";
 //    }
-//working
+// working
 
     // initialize the map
     app.initMap = function(view){

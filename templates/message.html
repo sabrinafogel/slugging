@@ -30,16 +30,58 @@
       margin-right: 5px;
   }
 }
+
+/* css styling for a generic looking i info button */
+.info-button {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        font-size: 16px;
+        line-height: 24px;
+        text-decoration: none;
+}
+
+/* css settings for profile pic */
+.avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding: 20px; 
+}
+
 </style>
 
 
 <div class="section" id="vue-target">
+  <!-- display the name of the person you are dming, also a back button and more info button -->
+  [[for p in profile:]]
+    <div>
+      <button class="button is-size-5" onclick="window.history.back()">
+        <span class="icon">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span>Back</span>
+      </button>
+      <!-- [[=p["profilePic"]]] -->
+      <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
+
+      <a class="info-button is-pulled-right is-size-4 mt-2" href="[[=URL('displayProfile', p['id'])]]">i</a>
+
+      <h1 class="title is-2 has-text-centered">[[=p["firstName"] + " " + p["lastName"]]]</h1>
+
+    </div>
+  [[pass]]
+
   <div id="comments" class="block">
     <!-- Here will go the comments. -->
     <div v-for="c in comment_list" class="block">
       <div class="message-body" :class="{'is-pulled-right': c.alignRight}">
-        <span class="username">{{ c.username }}:</span>
-        {{c.text}}
+        <span class="username">{{c.text}}</span>
       </div>
     </div>
   </div>
@@ -56,10 +98,10 @@
 
 [[block page_scripts]]
 <script>
-<!--  added this-->
+  // add this
   let load_messages_url = "[[=XML(load_messages_url)]]";
   let add_messages_url = "[[=XML(add_messages_url)]]";
-<!--  added this-->
+  // add this
 </script>
 <script src="js/index.js"></script>
 [[end]]
