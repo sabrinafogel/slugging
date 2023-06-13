@@ -54,7 +54,9 @@ def driver():
 
     # to get all the data needed to place markers
     markerList = [row for row in db().select(db.user.firstName, db.user.lastName, db.user.category, db.user.location)]
-    print(markerList)
+    
+    # print to terminal for testing
+    # print(markerList)
 
     return dict(results=results, markerList=markerList, driverURL = URL('driver'), url_signer=url_signer)
 
