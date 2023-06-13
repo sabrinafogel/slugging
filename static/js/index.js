@@ -35,6 +35,12 @@ let init = (app) => {
         center: sc,
         });
 
+        // new google.maps.Marker({
+        //     position: { lat: 36.974117, lng: -122.030792 },
+        //     map,
+        //     title: "Hello World!",
+        // });
+
         // get the database lat and long for markers
         axios.get(driverURL)
             .then(function (response){
