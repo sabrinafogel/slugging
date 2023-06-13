@@ -44,7 +44,7 @@ def index():
 
 # driver search
 @action("driver")
-@action.uses(db, 'driver.html', auth)
+@action.uses(db, 'driver.html', auth, url_signer)
 def driver():
     results = []
 
@@ -56,11 +56,11 @@ def driver():
     markerList = [row for row in db().select(db.user.firstName, db.user.lastName, db.user.category, db.user.location)]
     print(markerList)
 
-    return dict(results=results, markerList=markerList, driverURL = URL('driver'))
+    return dict(results=results, markerList=markerList, driverURL = URL('driver'), url_signer=url_signer)
 
 # rider search
 @action("rider")
-@action.uses(db, 'rider.html', auth)
+@action.uses(db, 'rider.html', auth, url_signer)
 def rider():
     results = []
 
@@ -68,7 +68,7 @@ def rider():
         if user['category'] == ("rider"):
             results.append(user)
     
-    return dict(results=results, riderURL = URL('rider'))
+    return dict(results=results, riderURL = URL('rider'), url_signer=url_signer)
 
 @action("profile")
 @action.uses(db, 'profile.html', auth)
@@ -112,10 +112,9 @@ def displayProfile(id=None):
     #
     return dict(profile=profile)
 
-
 @action("message")
-@action.uses(db, 'message.html', auth)
-def profile():
+@action.uses(db, 'message.html', auth, url_signer, auth.user, url_signer.verify())
+def message():
     # rows = db(db.user.id == auth.user_id).select().as_list()
     # return dict(rows=rows)
     return dict(load_messages_url = URL('load_messages', signer=url_signer),
