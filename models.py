@@ -40,13 +40,13 @@ db.define_table('user',
                 Field('location'),
                 Field('schedule', 'string'),
                 Field('license', 'string'),
-                Field('monday'),
-                Field('tuesday'),
-                Field('wednesday'),
-                Field('thursday'),
-                Field('friday'),
-                Field('saturday'),
-                Field('sunday'),
+                Field('monday', 'string'),
+                Field('tuesday', 'string'),
+                Field('wednesday', 'string'),
+                Field('thursday', 'string'),
+                Field('friday', 'string'),
+                Field('saturday', 'string'),
+                Field('sunday', 'string'),
                 )
 
 db.define_table(
@@ -116,13 +116,20 @@ def add_users_for_testing(num_users):
         i = random.randint(0,6)
         schedule = random.choice(days_of_week) + ": " + r_times[i] + "-" + r_times[i+1]
         #temp data
-        monday = random.choice(r_times)
-        tuesday = random.choice(r_times)
-        wednesday = random.choice(r_times)
-        thursday = random.choice(r_times)
-        friday = random.choice(r_times)
-        saturday = random.choice(r_times)
-        sunday = random.choice(r_times)
+        m = random.randint(0,6)
+        monday = random.choice([r_times[m] + "-" + r_times[m+1], "None"])
+        tu = random.randint(0,6)
+        tuesday = random.choice([r_times[tu] + "-" + r_times[tu+1], "None"])
+        w = random.randint(0,6)
+        wednesday = random.choice([r_times[w] + "-" + r_times[w+1], "None"])
+        th = random.randint(0,6)
+        thursday = random.choice([r_times[th] + "-" + r_times[th+1], "None"])
+        f = random.randint(0,6)
+        friday = random.choice([r_times[f] + "-" + r_times[f+1], "None"])
+        sa = random.randint(0,6)
+        saturday = random.choice([r_times[sa] + "-" + r_times[sa+1], "None"])
+        su = random.randint(0,6)
+        sunday = random.choice([r_times[su] + "-" + r_times[su+1], "None"])
 
         user_info = dict(
             username=username,
