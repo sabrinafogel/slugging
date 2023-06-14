@@ -41,7 +41,18 @@
           </div>
         </body>
   
-  
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <input class="input" type="text" placeholder="Search users" v-model="query" @keyup="get_users">
+          </div>
+          <div class="control">
+            <button class="button" @click="query = ''">
+              <span class="icon is-small">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </button>
+          </div>
+        </div>
         <body>
           [[for i in results:]]
           <div class="box">
@@ -71,6 +82,40 @@
                   <p>
                     <strong>Schedule</strong>: [[=i["schedule"]]]
                   </p>
+                  <table class="table is-striped is-fullwidth">
+                    <tr>
+                       <th>Monday</th>
+                       <th>Tuesday</th>
+                       <th>Wednesday</th>
+                       <th>Thursday</th>
+                       <th>Friday</th>
+                       <th>Saturday</th>
+                       <th>Sunday</th>
+                       <th>                                             
+                      </th>
+                    </tr>
+                    <td> 
+                      [[=i["monday"]]]
+                    </td>  
+                    <td>
+                      [[=i["tuesday"]]]
+                    </td> 
+                    <td>
+                      [[=i["wednesday"]]]
+                    </td> 
+                    <td>
+                      [[=i["thursday"]]]
+                    </td> 
+                    <td>
+                      [[=i["friday"]]]
+                    </td> 
+                    <td>
+                      [[=i["saturday"]]]
+                    </td> 
+                    <td>
+                      [[=i["sunday"]]]
+                    </td>       
+                  </table>   
                 </div>
                 <div class="control">
                   <a class="button is-primary" href="[[=URL('displayProfile', i['id'])]]">Full Bio</a>
