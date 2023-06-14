@@ -39,7 +39,14 @@ db.define_table('user',
                 Field('numSeats'),
                 Field('location'),
                 Field('schedule', 'string'),
-                Field('license', 'string')
+                Field('license', 'string'),
+                Field('monday'),
+                Field('tuesday'),
+                Field('wednesday'),
+                Field('thursday'),
+                Field('friday'),
+                Field('saturday'),
+                Field('sunday'),
                 )
 
 db.define_table(
@@ -108,6 +115,14 @@ def add_users_for_testing(num_users):
         license = random.choice(nums) + random.choice(lets) + random.choice(lets) + random.choice(lets) + random.choice(nums) + random.choice(nums) + random.choice(nums)
         i = random.randint(0,6)
         schedule = random.choice(days_of_week) + ": " + r_times[i] + "-" + r_times[i+1]
+        #temp data
+        monday = random.choice(r_times)
+        tuesday = random.choice(r_times)
+        wednesday = random.choice(r_times)
+        thursday = random.choice(r_times)
+        friday = random.choice(r_times)
+        saturday = random.choice(r_times)
+        sunday = random.choice(r_times)
 
         user_info = dict(
             username=username,
@@ -121,7 +136,16 @@ def add_users_for_testing(num_users):
             carMake=carMake,
             location=location,
             license = license,
-            schedule = schedule
+            schedule = schedule,
+
+            #temporary database
+            monday=monday,
+            tuesday=tuesday,
+            wednesday=wednesday,
+            thursday=thursday,
+            friday=friday,
+            saturday=saturday,
+            sunday=sunday,
         )
         #auth.register(user_info, send=False)
         # Adds some content for each user.
