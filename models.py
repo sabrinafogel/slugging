@@ -38,7 +38,7 @@ db.define_table('user',
                 Field('carModel'),
                 Field('numSeats'),
                 Field('location'),
-                Field('schedule'),
+                Field('schedule', 'string'),
                 Field('license', 'string')
                 )
 
@@ -106,8 +106,9 @@ def add_users_for_testing(num_users):
         carMake = random.randint(2000,2022)
         location = random.choice(locationList)
         license = random.choice(nums) + random.choice(lets) + random.choice(lets) + random.choice(lets) + random.choice(nums) + random.choice(nums) + random.choice(nums)
-        #license = (random.randint(1,9))
-        #license = "%i%i%i%i" % (random.randint(1,9), random.randint(1,9), random.randint(1,9), random.randint(1,9))
+        i = random.randint(0,6)
+        schedule = random.choice(days_of_week) + ": " + r_times[i] + "-" + r_times[i+1]
+
         user_info = dict(
             username=username,
             #email=username + "@ucsc.edu",
@@ -119,7 +120,8 @@ def add_users_for_testing(num_users):
             carModel=carModel,
             carMake=carMake,
             location=location,
-            license = license
+            license = license,
+            schedule = schedule
         )
         #auth.register(user_info, send=False)
         # Adds some content for each user.
