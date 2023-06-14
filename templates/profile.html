@@ -23,43 +23,64 @@
         <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
     </div>
     <div class="column is-one-quarter">
-        <!--Labels for the table-->
+         
+        
+         [[for p in profile:]]
+
+
+                 [[if p["category"] == "rider":]]
         <table class="table">
-          
             <tr><td>Name</td></tr>
-            
-            <tr> <td> Category</td> </tr>
-             
-             <tr><td>Availability:</td></tr>
-             <!--if the user is a driver than it should display certain info such as the car make, number of seats, and car model -->
-            
-               
+            <tr><td>Category</td></tr>
+            <tr><td>Schedule</td></tr>
         </table>
+        [[pass]]
+        [[if p["category"] == "driver":]] <!--p is a driver-->
+        <table class="table">
+            <!--if the user is a driver than it should display certain info such as the car make, number of seats, and car model -->
+            <tr><td>Name</td></tr>   
+            <tr><td>Category</td></tr>   
+            <tr><td>Car Make</td></tr>
+            <tr><td>Car Model</td></tr> 
+            <tr><td>Lisence Plate</td></tr> 
+            <tr><td>Number of Seats</td></tr>
+            <tr><td>Schedule</td></tr>
+            <tr>
+                <!--insert form here-->
+            </tr>      
+        </table>
+        [[pass]]    <!-- pass for driver category-->
+        
+            
+            [[pass]] <!-- pass for for profile loop-->
+
+
+
     </div>
+    
+    
     <div class="column is-half">
         <!--input form that will help edit the information in the user profile.-->
-        [[for r in rows:]]
-        <table class="table">
-          
-            <tr><td>[[=r["first_name"] + " " + r["last_name"]]] </td></tr>
-                          
-             <tr><td>  Rider</td></tr>
-             
-               <tr>
-             <td>
-            <table >
-            <tr>
-             <th>Monday</th>
-             <th>Tuesday</th>
-             <th>Wednesday</th>
-             <th>Thursday</th>
-             <th>Friday</th>
-             <th>Saturday</th>
-             <th>Sunday</th>
-             <th></th>
-          </tr>
-            
-            [[for s in schedule:]]
+        [[for p in profile:]]
+    <div class="column is-half">
+    <!--input form that will help edit the information in the user profile.-->
+        [[if p["category"] == "rider":]]
+            <table class="table">
+                <tr><td>[[=p["firstName"] + " " + p["lastName"]]]</td></tr>
+                 <tr><td>[[=p["category"]]]</td></tr>
+                <tr><td>
+                     <table class="table is-striped ">
+        <tr>
+           <th>Monday</th>
+           <th>Tuesday</th>
+           <th>Wednesday</th>
+           <th>Thursday</th>
+           <th>Friday</th>
+           <th>Saturday</th>
+           <th>Sunday</th>
+           <th></th>
+        </tr>
+         [[for s in schedule:]]
           <tr>
              [[if s["monday"] : ]]
              <td>
@@ -137,12 +158,12 @@
           </tr>
           [[pass]]
                  </table>
-             </td>    
-             </tr>
-             
-             <tr>
+
+    </tr>
+                
+                 <tr>
                   <td>
-                    <a class="button is-warning" href="[[=URL('editProfile', r['id'] )]]">
+                    <a class="button is-warning" href="[[=URL('editProfile', p['id'] )]]">
                         <span class="icon"> <i class="fa fa-bars"></i> </span>
                         <span>Edit</span>
                     </a> 
@@ -156,13 +177,145 @@
             
              </tr> 
               
+                
+            </table>
+
+
+        [[else:]] <!--p is a driver-->
+            <table class="table">
+                <tr><td>[[=p["firstName"] + " " + p["lastName"]]]</td></tr>       
+                <tr><td>[[=p["category"]]]</td></tr>
+                <tr><td>[[=p["carMake"]]]</td></tr>
+                <tr><td>[[=p["carModel"]]]</td></tr> 
+                <tr><td>[[=p["license"]]]</td></tr> 
+                <tr><td>[[=p["numSeats"]]]</td></tr>
+                      <tr><td>
+                     <table class="table is-striped ">
+        <tr>
+           <th>Monday</th>
+           <th>Tuesday</th>
+           <th>Wednesday</th>
+           <th>Thursday</th>
+           <th>Friday</th>
+           <th>Saturday</th>
+           <th>Sunday</th>
+           <th></th>
+        </tr>
+         [[for s in schedule:]]
+          <tr>
+             [[if s["monday"] : ]]
+             <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["monday"]]]</span>
+                    </a> 
+             </td>
+
+             [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["tuesday"] : ]]
+                 <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["tuesday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["wednesday"] : ]]
+                 <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["wednesday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["thursday"] : ]]
+                 <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["thursday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["friday"] : ]]
+                <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["friday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["saturday"] : ]]
+                <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["saturday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
+            
+             [[if s["sunday"] : ]]
+                <td>
+                  <a class="button is-success is-small">
+                        <span>[[=s["sunday"]]]</span>
+                    </a> 
+             </td>
+            [[else:]]
+            <td></td>
+            [[pass]]
              
-        
           
-        </table>
+             
+          </tr>
+          [[pass]]
+                 </table>
+
+  
+                </td>
+                
+                </tr>
+                
+                 <tr>
+                  <td>
+                    <a class="button is-warning" href="[[=URL('editProfile', p['id'] )]]">
+                        <span class="icon"> <i class="fa fa-bars"></i> </span>
+                        <span>Edit</span>
+                    </a> 
+                    
+               
+                     <a class="button is-primary" href="[[=URL('index')]]">
+                    <span class="icon"><i class="fa fa-backward"></i> </span>
+                     <span> Back </span>
+                 </a>
+                </td>
+            
+             </tr> 
+               
+               
+               
+            </table>
         [[pass]]
-    </div>
+        
+         
+              
+ 
+         
+    </div>  <!--end of half column-->
+    [[pass]]  
+
     
+</div>
+
 </div>
 
     
