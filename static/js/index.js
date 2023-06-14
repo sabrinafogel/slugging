@@ -24,6 +24,26 @@ let init = (app) => {
         return a;
     };
 
+    app.erase_search = function(){
+        app.vue.query = ""
+        axios.get(get_users_url).then(function(response) {
+            app.vue.users = app.enumerate(response.data.all_users);
+        });
+    };
+
+    app.search = function(){
+        if (app.vue.query.length > 0){
+            axios.get(search_url, {params: {q: app.vue.query}}).then(function(response) {
+                app.vue.users = app.enumerate(response.data.all_users);
+                // app.vue.users = []
+            });
+        }else{
+            axios.get(get_users_url).then(function(response) {
+                app.vue.users = app.enumerate(response.data.all_users);
+            });
+        }
+    };
+
     // initialize the map
     app.initMap = function(view){
         // map location: Santa Cruz
@@ -107,6 +127,8 @@ let init = (app) => {
             });
         };
     };
+
+    
 
     // set user id that you are messaging
     app.getUser = function (otherUserID) {

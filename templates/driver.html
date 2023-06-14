@@ -23,30 +23,30 @@
           <div class="field has-addons">
             <div class="control">
               <div class="select">
-                <select>
-                  <option value="date">Select Date</option>
-                  <option value="date">Sunday</option>
-                  <option value="date">Monday</option>
-                  <option value="date">Tuesday</option>
-                  <option value="date">Wednesday</option>
-                  <option value="date">Thursday</option>
-                  <option value="date">Friday</option>
-                  <option value="date">Saturday</option>
+                <select id="dateSelect">
+                  <option value="0">Select Date</option>
+                  <option value="1">Sunday</option>
+                  <option value="2">Monday</option>
+                  <option value="3">Tuesday</option>
+                  <option value="4">Wednesday</option>
+                  <option value="5">Thursday</option>
+                  <option value="6">Friday</option>
+                  <option value="7">Saturday</option>
                 </select>
               </div>
             </div>
             <div class="control">
-              <button class="button is-primary">Search</button>
+              <button id ="dateSelectButton" class="button is-primary">Search</button> 
             </div>
           </div>
         </body>
   
         <div class="field has-addons">
           <div class="control is-expanded">
-            <input class="input" type="text" placeholder="Search users" v-model="query" @keyup="get_users">
+            <input class="input" type="text" placeholder="Search users" v-model="query" @keyup="search">
           </div>
           <div class="control">
-            <button class="button" @click="query = ''">
+            <button class="button" @click="erase_search">
               <span class="icon is-small">
                 <i class="fa fa-times-circle"></i>
               </span>
