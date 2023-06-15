@@ -7,6 +7,7 @@ import random
 from py4web.utils.populate import FIRST_NAMES, LAST_NAMES, IUP
 from .common import db, Field, auth
 from pydal.validators import *
+from pydal.validators import IS_NOT_EMPTY, IS_IN_SET
 
 
 def get_user_email():
@@ -33,7 +34,7 @@ db.define_table('user',
                 Field('profilePic'),
                 Field('firstName'),
                 Field('lastName'),
-                Field('category'),
+                Field('category', requires=IS_IN_SET(['Driver','Rider'])),
                 Field('carMake'),
                 Field('carModel'),
                 Field('numSeats'),

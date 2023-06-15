@@ -110,10 +110,38 @@ def profile():
 @action.uses(db, session, url_signer, "editProfile.html", auth)
 def editProfile(user_id=None):
     assert user_id is not None 
-    form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
+    #form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
     a = db(db.user.id == user_id).select().first()
+    
+    if a.category == "rider" or a.category == "Rider":
+        form = Form([Field('first_name'), Field('last_name'), Field('category'), Field('location')], record=dict(first_name=a.firstName, last_name=a.lastName, category= a.category, location = a.location), deletable = False, csrf_session = session, formstyle=FormStyleBulma)
+    else:
+        form = Form([Field('first_name'), Field('last_name'), Field('category'), Field('car_make'), Field('car_model'), Field('number_of_seats'), Field('license_plate'), Field('location')],record=dict(first_name=a.firstName, last_name=a.lastName, category= a.category, car_make=a.carMake, car_model =a.carModel, number_of_seats =a.numSeats, license_plate = a.license, location = a.location) ,  deletable = False, csrf_session = session, formstyle=FormStyleBulma )
+    
     if form.accepted:
-       redirect(URL('profile'))
+        row =  db(db.user.id == user_id).select().first()
+        if a.category == "rider":
+            row.firstName = form.vars["first_name"]
+            row.lastName = form.vars["last_name"]
+            row.category = form.vars["category"]
+            row.carMake = "None"
+            row.carModel = "None"
+            row.numSeats = "None"
+            row.license = "None"
+            row.location = form.vars["location"]
+        else:
+            row.firstName = form.vars["first_name"]
+            row.lastName = form.vars["last_name"]
+            row.category = form.vars["category"]
+            row.carMake = form.vars["car_make"]
+            row.carModel = form.vars["car_model"]
+            row.numSeats = form.vars["number_of_seats"]
+            row.license = form.vars["license_plate"]
+            row.location = form.vars["location"]
+
+        row.update_record()
+        current_user = db(db.auth_user.email == get_user_email()).select()
+        redirect(URL('index'))
        
     rows = db(db.schedule.user_email == get_user_email()).select()
     

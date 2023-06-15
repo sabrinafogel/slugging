@@ -26,72 +26,14 @@
       <div class="column">
           <h1 class="title">Edit [[=account.firstName]]'s Profile</h1>
           
-          <div class="field">
-            <label class="label"> First Name </label>      
-            <div class="control"><input class="input" type="text" placeholder="[[=account.firstName]]"></div>    
-            
-                       </div>
-            
-            <div class ="field">
-                <label class="label"> Last Name </label>      
-            <div class="control"><input class="input" type="text" placeholder="[[=account.lastName]]"></div>       
-            </div>
-
-            <div class="field">
-                <label class="label"> Location </label>      
-            <div class="control"><input class="input" type="text" placeholder="Location"></div>
-            </div>
-            
-            
-            
-           <div class="field">
-                <label class="label">Category </label>    
-            <div class="control">
-              <label class="radio"><input type="radio" name="question"> Driver </label>
-              <label class="radio"><input type="radio" name="question"> Rider </label>
-            </div>
-           </div>
-          
-          <div class="field">
-                <label class="label"> Car Make </label>      
-            <div class="control"><input class="input" type="text" placeholder="e.g Kia"></div>
-
+           <div class="block">
+              [[=form]]
           </div>
-          
-           <div class = "field">
-                <label class="label"> Car Model </label>      
-            <div class="control"><input class="input" type="text" placeholder="e.g Sorento"> </div>
-           </div>
-
-          <div class="field">
-            <label class="label"> License Plate </label>      
-           <div class="control"><input class="input" type="text" placeholder="e.g. 5XXX555"></div>
-
-          </div>
-
-           <div class="field">
-                <label class="label">Number of Seats</label>
-            <div class="control">
-              <div class="select">
-                <select>
-                  <option> 1 </option>
-                  <option> 2 </option>
-                  <option> 3 </option>
-                  <option> 4 </option>
-                  <option> 5 </option>
-                  <option> 6 </option>
-                  <option> 7 </option>
-                </select>
-              </div>
-            </div>
-            
-          </div>
-
           
  
 
        <div class="block">
-            <div class="title">Availability</div>
+            <div class="title">Edit Availability</div>
         <table class="table is-striped is-fullwidth">
           <tr>
              <th>Monday</th>
@@ -129,8 +71,8 @@
 
        <div class="field">
       <div class="control">
-        <button class="button is-link">Submit</button>
-         <a class="button is-danger" href="[[=URL('index')]]">
+       
+         <a class="button is-danger is-pulled-right" href="[[=URL('index')]]">
         <span class = "icon"><i class = "fa fa-ban"></i></span>
         <span>Exit Edit</span>
       </a> 
@@ -139,7 +81,7 @@
  </div>   
   
         
-      </div> <!--end of column-->>
+      </div> <!--end of column-->
       
 
       
