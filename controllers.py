@@ -174,12 +174,8 @@ def displayProfile(id=None):
     #if form.accepted:
     #   redirect(URL('profile'))
     #
-<<<<<<< HEAD
-    schedule = db(db.schedule.user_email == get_user_email()).select()
-    return dict(profile=profile, schedule=schedule)
-=======
+
     return dict(profile=profile, getUserURL = URL('getUser', signer=url_signer), url_signer=url_signer)
->>>>>>> f020f4413c509fc70331381c1cec4a53766c0c1d
 
 # each message form is the id of the user you are messaging
 @action('message/<id:int>')
