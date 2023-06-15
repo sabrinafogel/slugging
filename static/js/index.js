@@ -149,7 +149,31 @@ let init = (app) => {
             });
         };
     };
-    
+
+    app.complete = (markerData) => {
+        // Initializes useful fields of images.
+        images.map((img) => {
+            img.rating = 0;
+            img.num_stars_display = 0;
+        })
+    };
+
+    app.set_stars = (img_idx, num_stars) => {
+        let img = app.vue.images[img_idx];
+        img.rating = num_stars;
+        // Sets the stars on the server.
+        axios.post(set_rating_url, {image_id: img.id, rating: num_stars});
+    };
+
+    app.stars_out = (img_idx) => {
+        let img = app.vue.images[img_idx];
+        img.num_stars_display = img.rating;
+    };
+
+    app.stars_over = (img_idx, num_stars) => {
+        let img = app.vue.images[img_idx];
+        img.num_stars_display = num_stars;
+    };
 
     // set user id that you are messaging
     app.getUser = function (otherUserID) {
@@ -170,6 +194,9 @@ let init = (app) => {
         initMap: app.initMap,
         getUser: app.getUser,
         upload_file: app.upload_file,
+        set_stars: app.set_stars,
+        stars_out: app.stars_out,
+        stars_over: app.stars_over,
     };
 
     app.upload_file = function(event, row_idx){
