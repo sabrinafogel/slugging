@@ -16,6 +16,9 @@ def get_user_email():
 def get_time():
     return datetime.datetime.utcnow()
 
+def get_user():
+    return auth.current_user.get('id') if auth.current_user else None
+
 # For table 'user':
 # username = the user's username
 # password = the user's password
@@ -258,3 +261,8 @@ db.schedule.id.readable = False
 db.schedule.id.writable = False
 db.schedule.user_email.readable = db.schedule.user_email.writable =False
 
+db.define_table('stars',
+                Field('image', 'reference auth_user'), 
+                Field('rating', 'integer', default=0),
+                Field('rater', 'reference auth_user', default=get_user) # User doing the rating.
+                )
