@@ -17,6 +17,16 @@
   width: fit-content;
 }
 
+.message-body.is-pulled-left {
+  align-self: flex-start;
+  background-color: lightgray;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
 .message-body:not(.is-pulled-right) {
   background-color: lightblue;
   color: black;
@@ -119,7 +129,9 @@
 
       <!-- if message is from other user, display left -->
       <p class="control" v-if="c.user_id == otherUserID">
-        <span class="username">{{c.text}}</span>
+        <div class="message-body" :class="{'is-pulled-left': c.alignLeft}">
+          <span class="username">{{c.text}}</span>
+        </div>
       </p>
 
       <!-- else, message is from logged in user, display right -->
