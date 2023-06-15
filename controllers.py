@@ -144,8 +144,16 @@ def editProfile(user_id=None):
         redirect(URL('index'))
        
     rows = db(db.schedule.user_email == get_user_email()).select()
-    
-    return dict(rows=rows, account=a,form=form, user_id=user_id, url_signer=url_signer)
+
+    return dict(rows=rows, account=a,form=form, user_id=user_id, url_signer=url_signer, upload_profilePic_url = URL('upload_profilePic', signer=url_signer),)
+
+@action('upload_profilePic', method="POST")
+@action.uses(url_signer.verify(), db)
+def upload_profilePic():
+    user_id = request.json.get("user_id")
+    profilePic = request.json.get("profilePic")
+    db(db.user.id == user_id).update(profilePic=profilePic)
+    return "okay"
 
 
 @action('schedule/<user_id:int>', method=["GET","POST"])
