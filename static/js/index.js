@@ -169,7 +169,29 @@ let init = (app) => {
         viewChange: app.viewChange,
         initMap: app.initMap,
         getUser: app.getUser,
+        upload_file: app.upload_file,
     };
+
+    app.upload_file = function(event, row_idx){
+        let input = event.target;
+        let file = input.files[0];
+        let row = app.vue.rows[row_idx];
+        if (file){
+            let reader = new FileReader();
+            reader.addEvenetListener("load", function(){
+                axios.post(upload_profilePic_url,
+                    {
+                        user_id: row.id,
+                        profilePic: reader.result
+                    })
+                    .then(function(){
+                        row.profilePic = reader.result;
+                });
+            });
+            reader.readAsDataURL(file);
+        }
+    };
+
 
     // This creates the Vue instance.
     app.vue = new Vue({
