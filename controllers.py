@@ -41,7 +41,8 @@ url_signer = URLSigner(session)
 def index():
     return dict(
         # COMPLETE: return here any signed URLs you need.
-        my_callback_url = URL('my_callback', signer=url_signer)
+        my_callback_url = URL('my_callback', signer=url_signer),
+        upload_profilePic_url = URL('upload_profilePic', signer=url_signer)
     )
 
 # driver search
@@ -154,7 +155,6 @@ def upload_profilePic():
     profilePic = request.json.get("profilePic")
     db(db.user.id == user_id).update(profilePic=profilePic)
     return "okay"
-
 
 @action('schedule/<user_id:int>', method=["GET","POST"])
 @action.uses(db, session, url_signer, "schedule.html", auth)

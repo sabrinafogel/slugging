@@ -21,7 +21,7 @@
     <div class="container is-mobile">
     <div class="columns">
       <div class="column is-one-quarter">
-        <div v-if="!r.profilePic">
+        <div v-if="!profilePic">
           <p class="control">
             <div class="file is-info">
               <label class="file-label">
@@ -39,7 +39,7 @@
           </p>
         </div>
 
-        <img v-if="r.profilePic" width="250" :src="r.profilePic" />
+        <img v-if="profilePic" width="250" :src="profilePic" />
       </div>
       <div class="column">
           <h1 class="title">Edit [[=account.firstName]]'s Profile</h1>
@@ -111,6 +111,14 @@
 
 
 </div> <!--end of section-->
+
+[[block page_scripts]]
+<script>
+  let upload_profilePic_url = "[[=XML(upload_profilePic_url)]]";
+</script>
+
+<script src>"js/index.js"</script>
+[[end]]
 
 [[block page_scripts]]
 <script>
