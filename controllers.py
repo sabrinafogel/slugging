@@ -81,7 +81,7 @@ def rider():
         if user['category'] == ("rider"):
             results.append(user)
     
-    return dict(results=results, riderURL = URL('rider'), url_signer=url_signer, mapURL = URL('map'))
+    return dict(results=results, riderURL = URL('rider'), url_signer=url_signer, mapURL = URL('map'), getUserURL = URL('getUser'))
 
 @action("profile")
 @action.uses(db, 'profile.html', auth)
@@ -194,12 +194,12 @@ def load_messages():
 
     otherUserId = otherUserId[0]['id']
         
-    print("otherUserId: ", otherUserId)
+    # print("otherUserId: ", otherUserId)
 
     # Retrieve the logged-in user's ID
     user_id = auth.current_user.get('id') #new
-    print("user id: ", user_id)
-
+    # print("user id: ", user_id)
+    
     # Get the user's username and profile picture
     # user = db.auth_user[user_id]
 
