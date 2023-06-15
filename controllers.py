@@ -51,15 +51,23 @@ def driver():
     for user in db(db.user).select().as_list():
         if user['category'] == ("driver"):
             results.append(user)
-
-    # to get all the data needed to place markers
-    markerList = [row for row in db().select(db.user.firstName, db.user.lastName, db.user.category, db.user.location)]
     
     # print to terminal for testing
     # print(markerList)
 
-    return dict(results=results, markerList=markerList, driverURL = URL('driver'), getUserURL = URL('getUser'),
-                url_signer=url_signer)
+    return dict(results=results, driverURL = URL('driver'), getUserURL = URL('getUser'),
+                url_signer=url_signer, mapURL = URL('map'))
+
+# map info
+@action("map")
+@action.uses(db)
+def map():
+    results = []
+
+    # to get all the data needed to place markers
+    results = [row for row in db().select(db.user.firstName, db.user.lastName, db.user.category, db.user.location)]
+
+    return dict(results=results)
 
 # rider search
 @action("rider")
@@ -71,7 +79,7 @@ def rider():
         if user['category'] == ("rider"):
             results.append(user)
     
-    return dict(results=results, riderURL = URL('rider'), url_signer=url_signer)
+    return dict(results=results, riderURL = URL('rider'), url_signer=url_signer, mapURL = URL('map'))
 
 @action("profile")
 @action.uses(db, 'profile.html', auth)
