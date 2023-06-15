@@ -174,7 +174,7 @@ def displayProfile(id=None):
     #if form.accepted:
     #   redirect(URL('profile'))
     #
-    return dict(profile=profile)
+    return dict(profile=profile, getUserURL = URL('getUser', signer=url_signer), url_signer=url_signer)
 
 # each message form is the id of the user you are messaging
 @action('message/<id:int>')
