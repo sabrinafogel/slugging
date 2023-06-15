@@ -112,10 +112,10 @@ def editProfile(user_id=None):
     #form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
     a = db(db.user.id == user_id).select().first()
     
-    if a.category == "rider":
-        form = Form([Field('first_name'), Field('last_name'), Field('category')], record=dict(first_name=a.firstName, last_name=a.lastName, category= a.category), csrf_session = session, formstyle=FormStyleBulma)
+    if a.category == "rider" or a.category == "Rider":
+        form = Form([Field('first_name'), Field('last_name'), Field('category'), Field('location')], record=dict(first_name=a.firstName, last_name=a.lastName, category= a.category, location = a.location), deletable = False, csrf_session = session, formstyle=FormStyleBulma)
     else:
-        form = Form([Field('first_name'), Field('last_name'), Field('category'), Field('car_make'), Field('car_model'), Field('number_of_seats'), Field('license_plate'), Field('location')],record=dict(first_name=a.firstName, last_name=a.lastName, category= a.category, car_make=a.carMake, car_model =a.carModel, number_of_seats =a.numSeats, license_plate = a.license, location = a.location) ,  csrf_session = session, formstyle=FormStyleBulma )
+        form = Form([Field('first_name'), Field('last_name'), Field('category'), Field('car_make'), Field('car_model'), Field('number_of_seats'), Field('license_plate'), Field('location')],record=dict(first_name=a.firstName, last_name=a.lastName, category= a.category, car_make=a.carMake, car_model =a.carModel, number_of_seats =a.numSeats, license_plate = a.license, location = a.location) ,  deletable = False, csrf_session = session, formstyle=FormStyleBulma )
     
     if form.accepted:
         row =  db(db.user.id == user_id).select().first()
@@ -123,6 +123,11 @@ def editProfile(user_id=None):
             row.firstName = form.vars["first_name"]
             row.lastName = form.vars["last_name"]
             row.category = form.vars["category"]
+            row.carMake = "None"
+            row.carModel = "None"
+            row.numSeats = "None"
+            row.license = "None"
+            row.location = form.vars["location"]
         else:
             row.firstName = form.vars["first_name"]
             row.lastName = form.vars["last_name"]

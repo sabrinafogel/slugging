@@ -28,14 +28,15 @@
          [[for p in profile:]]
 
 
-                 [[if p["category"] == "rider":]]
+                 [[if p["category"] == "rider" or p["category"] == "Rider":]]
         <table class="table">
             <tr><td>Name</td></tr>
             <tr><td>Category</td></tr>
+            <tr><td>Location</td></tr>
             <tr><td>Schedule</td></tr>
         </table>
         [[pass]]
-        [[if p["category"] == "driver":]] <!--p is a driver-->
+        [[if p["category"] == "driver" or p["category"] == "Driver":]] <!--p is a driver-->
         <table class="table">
             <!--if the user is a driver than it should display certain info such as the car make, number of seats, and car model -->
             <tr><td>Name</td></tr>   
@@ -44,6 +45,7 @@
             <tr><td>Car Model</td></tr> 
             <tr><td>Lisence Plate</td></tr> 
             <tr><td>Number of Seats</td></tr>
+            <tr><td>Location</td></tr>
             <tr><td>Schedule</td></tr>
             <tr>
                 <!--insert form here-->
@@ -64,10 +66,11 @@
         [[for p in profile:]]
     <div class="column is-half">
     <!--input form that will help edit the information in the user profile.-->
-        [[if p["category"] == "rider":]]
+        [[if p["category"] == "rider" or p["category"] == "Rider":]]
             <table class="table">
                 <tr><td>[[=p["firstName"] + " " + p["lastName"]]]</td></tr>
                  <tr><td>[[=p["category"]]]</td></tr>
+                 <tr><td>[[=p["location"]]]</td></tr>
                 <tr><td>
                      <table class="table is-striped ">
         <tr>
@@ -189,6 +192,7 @@
                 <tr><td>[[=p["carModel"]]]</td></tr> 
                 <tr><td>[[=p["license"]]]</td></tr> 
                 <tr><td>[[=p["numSeats"]]]</td></tr>
+                <tr><td>[[=p["location"]]]</td></tr>
                       <tr><td>
                      <table class="table is-striped ">
         <tr>
