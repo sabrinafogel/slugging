@@ -227,7 +227,7 @@ def load_messages():
     #     comment['username'] = username#new
 
     # get messages logged in user sent to person they are messaging, and vise versa
-    comment_list = [row for row in db(((db.user_message.user_id == user_id) & (db.user_message.otherUserID == otherUserId)) | ((db.user_message.user_id == otherUserId) & (db.user_message.otherUserID == user_id))).select(db.user_message.user_id, db.user_message.text, db.user_message.timestamp, orderby=db.user_message.timestamp)]
+    comment_list = [row for row in db(((db.user_message.user_id == user_id) & (db.user_message.otherUserID == otherUserId)) | ((db.user_message.user_id == otherUserId) & (db.user_message.otherUserID == user_id))).select(db.user_message.user_id, db.user_message.otherUserID, db.user_message.text, db.user_message.timestamp, orderby=db.user_message.timestamp)]
     
     # this one is a placeholder, just gets any message logged in user has ever sent to anyone
     # comment_list = [row for row in db(db.user_message.user_id == user_id).select(db.user_message.user_id, db.user_message.timestamp, db.user_message.text, orderby=db.user_message.timestamp)]
