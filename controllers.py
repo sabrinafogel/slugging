@@ -166,7 +166,7 @@ def schedule(user_id=None):
     return dict(rows=rows, user_id=user_id, url_signer=url_signer)
 
 @action('displayProfile/<id:int>', method=["GET","POST"])
-@action.uses(db, "displayProfile.html", auth)
+@action.uses(db, "displayProfile.html", auth, auth.user, url_signer)
 def displayProfile(id=None):
     assert id is not None
     profile = db(db.user.id == id).select().as_list()
