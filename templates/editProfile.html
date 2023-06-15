@@ -21,7 +21,25 @@
     <div class="container is-mobile">
     <div class="columns">
       <div class="column is-one-quarter">
-        <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar" >
+        <div v-if="!r.profilePic">
+          <p class="control">
+            <div class="file is-info">
+              <label class="file-label">
+                <input class="file-input" type="file"
+                       accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+                       @change="upload_file($event, r._idx)">
+                <span class="file-cta">
+                  <span class="file-label">
+                    Upload Picture
+                    <span><i class="fa fa-upload"></i></span>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </p>
+        </div>
+
+        <img v-if="r.profilePic" width="250" :src="r.profilePic" />
       </div>
       <div class="column">
           <h1 class="title">Edit [[=account.firstName]]'s Profile</h1>
@@ -72,7 +90,7 @@
        <div class="field">
       <div class="control">
        
-         <a class="button is-danger is-pulled-right" href="[[=URL('index')]]">
+         <a class="button is-danger" href="[[=URL('index')]]">
         <span class = "icon"><i class = "fa fa-ban"></i></span>
         <span>Exit Edit</span>
       </a> 
@@ -93,3 +111,11 @@
 
 
 </div> <!--end of section-->
+
+[[block page_scripts]]
+<script>
+  let upload_profilePic_url = "[[=XML(upload_profilePic_url)]]";
+</script>
+
+<script src>"js/index.js"</script>
+[[end]]

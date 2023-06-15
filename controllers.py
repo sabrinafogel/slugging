@@ -32,6 +32,7 @@ from .common import db, session, T, cache, auth, logger, authenticated, unauthen
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_email, get_time
 import random
+import re
 
 url_signer = URLSigner(session)
 
@@ -80,7 +81,7 @@ def rider():
         if user['category'] == ("rider"):
             results.append(user)
     
-    return dict(results=results, riderURL = URL('rider'), url_signer=url_signer, mapURL = URL('map'))
+    return dict(results=results, riderURL = URL('rider'), url_signer=url_signer, mapURL = URL('map'), getUserURL = URL('getUser'))
 
 @action("profile")
 @action.uses(db, 'profile.html', auth)
@@ -143,8 +144,16 @@ def editProfile(user_id=None):
         redirect(URL('index'))
        
     rows = db(db.schedule.user_email == get_user_email()).select()
-    
-    return dict(rows=rows, account=a,form=form, user_id=user_id, url_signer=url_signer)
+
+    return dict(rows=rows, account=a,form=form, user_id=user_id, url_signer=url_signer, upload_profilePic_url = URL('upload_profilePic', signer=url_signer),)
+
+@action('upload_profilePic', method="POST")
+@action.uses(url_signer.verify(), db)
+def upload_profilePic():
+    user_id = request.json.get("user_id")
+    profilePic = request.json.get("profilePic")
+    db(db.user.id == user_id).update(profilePic=profilePic)
+    return "okay"
 
 
 @action('schedule/<user_id:int>', method=["GET","POST"])
@@ -165,8 +174,12 @@ def displayProfile(id=None):
     #if form.accepted:
     #   redirect(URL('profile'))
     #
+<<<<<<< HEAD
     schedule = db(db.schedule.user_email == get_user_email()).select()
     return dict(profile=profile, schedule=schedule)
+=======
+    return dict(profile=profile, getUserURL = URL('getUser', signer=url_signer), url_signer=url_signer)
+>>>>>>> f020f4413c509fc70331381c1cec4a53766c0c1d
 
 # each message form is the id of the user you are messaging
 @action('message/<id:int>')
@@ -187,9 +200,19 @@ def message(id = None):
 @action("load_messages")
 @action.uses(url_signer.verify(), db, auth.user)
 def load_messages():
+    # get the id of the user we are messaging
+    # otherUserId = request.json.get('otherID')
+    # otherUserId = otherUserId[0]['id']
+    otherUserId = db(db.tempID).select()
+
+    otherUserId = otherUserId[0]['id']
+        
+    # print("otherUserId: ", otherUserId)
+
     # Retrieve the logged-in user's ID
     user_id = auth.current_user.get('id') #new
-
+    # print("user id: ", user_id)
+    
     # Get the user's username and profile picture
     # user = db.auth_user[user_id]
 
@@ -206,10 +229,6 @@ def load_messages():
     # Add username and profile picture to each message
     # for comment in comment_list:
     #     comment['username'] = username#new
-
-    # get the id of the user we are messaging
-    otherUserId = request.query.get('id')
-    # print(otherUserId)
 
     # get messages logged in user sent to person they are messaging, and vise versa
     comment_list = [row for row in db(((db.user_message.user_id == user_id) & (db.user_message.otherUserID == otherUserId)) | ((db.user_message.user_id == otherUserId) & (db.user_message.otherUserID == user_id))).select(db.user_message.user_id, db.user_message.text, db.user_message.timestamp, orderby=db.user_message.timestamp)]
@@ -229,11 +248,16 @@ def add_messages():
 
     isoTime = get_time().isoformat()
 
+    otherUserId = db(db.tempID).select()
+
+    otherUserID = otherUserId[0]['id']
+
     db.user_message.insert(
         user_id = auth.current_user.get('id'),  # NEW Store the user's ID instead of email
         # username=username,  # NEW Store the username
         timestamp = isoTime,
-        text = message
+        text = message,
+        otherUserID = otherUserID
     )
     db.commit()
 
@@ -263,7 +287,7 @@ def editSchedule(schedule_id = None):
     return dict(form=form)
 
 @action("getUser", method=["GET", "POST"])
-@action.uses(db, auth.user)
+@action.uses(db)
 def getUser():
     if request.method == 'POST':
         # get the user id being messaged
@@ -276,8 +300,10 @@ def getUser():
         db.tempID.insert(id=id)
         db.commit()
 
+        # <input class="input" type="text" v-model="new_comment" style="width: 90vw;" @focus="getUser([[=p['id']]])"/>
+
     id = db(db.tempID).select()
-    print(id)
+    # print(id)
 
     return dict(id=id)
 

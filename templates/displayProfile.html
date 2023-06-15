@@ -22,7 +22,7 @@
 <title>Display Profile</title>
 <!--Needs to be different for drivers and riders-->
 
-<div class="columns">
+<div class="columns" id="vue-target">
 
     <div class="column is-one-quarter">
         <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
@@ -284,19 +284,27 @@
                 </a> </td>
             [[pass]]
             
-            <td><a class="button is-warning" href="[[=URL('message')]]">
+            <!-- <td><a class="button is-warning" href="[[=URL('message')]]">
                   <span class="icon"> <i class="fa fa-envelope" > </i></span>
                     <span>Message</span>
                 </a> </td>
             
-            </tr>
+            </tr> -->
 
- 
+            <a class="button is-primary" @focus="getUser([[=p['id']]])" href="[[=URL('message', p['id'], signer=url_signer)]]">Message</a>
          
     </div>
     [[pass]]  
     
 </div>
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+<script>
+  let getUserURL ="[[=XML(getUserURL)]]";
+</script>
+<script src="js/index.js"></script>
+[[end]]
 
     
 

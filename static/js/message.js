@@ -65,23 +65,24 @@ let init = (app) => {
         axios.get(getUserURL)
         .then(function (result) {
             app.vue.otherUserID = result.data.id;
+            // console.log(result.data.id);
+
+            // get the comment list based on the user id being messaged
+            axios.get(load_messages_url)
+            .then(function (comments) {
+                // console.log(app.vue.otherUserID);
+                app.vue.comment_list = comments.data.comment_list;
+            });
         });
 
-        console.log(app.vue.otherUserID);
-
-        // get the comment list based on the user id being messaged
-        axios.get(load_messages_url, {params: {id: app.vue.otherUserID}})
-        .then(function (result) {
-            app.vue.comment_list = result.data.comment_list;
-        });
     };
 
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
         add_comment: app.add_comment,
-        getUser: app.getUser,
-        load_messages: app.load_messages
+        // getUser: app.getUser,
+        load_messages: app.load_messages,
     };
 
     // This creates the Vue instance.
