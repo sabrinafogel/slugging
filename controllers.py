@@ -192,7 +192,9 @@ def load_messages():
     # otherUserId = otherUserId[0]['id']
     otherUserId = db(db.tempID).select()
 
-    print("otherUserId: ", otherUserId[0])
+    otherUserId = otherUserId[0]['id']
+        
+    print("otherUserId: ", otherUserId)
 
     # Retrieve the logged-in user's ID
     user_id = auth.current_user.get('id') #new
@@ -233,11 +235,16 @@ def add_messages():
 
     isoTime = get_time().isoformat()
 
+    otherUserId = db(db.tempID).select()
+
+    otherUserID = otherUserId[0]['id']
+
     db.user_message.insert(
         user_id = auth.current_user.get('id'),  # NEW Store the user's ID instead of email
         # username=username,  # NEW Store the username
         timestamp = isoTime,
-        text = message
+        text = message,
+        otherUserID = otherUserID
     )
     db.commit()
 
