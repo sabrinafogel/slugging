@@ -98,9 +98,10 @@ nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 lets = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 def add_users_for_testing(num_users):
-    # Test user names begin with "_".
+     # Test user names begin with "_".
     # Counts how many users we need to add.
     db(db.user.username.startswith("_")).delete()
+    db(db.auth_user.email.startswith("_")).delete()
     num_test_users = db(db.user.username.startswith("_")).count()
     num_new_users = num_users - num_test_users
     print("Adding", num_new_users, "users.")
@@ -108,6 +109,19 @@ def add_users_for_testing(num_users):
         first_name = random.choice(FIRST_NAMES)
         last_name = random.choice(LAST_NAMES)
         username = "_%s%.2i" % (first_name.lower(), k)
+        user = dict(
+            #username=username,
+            email=username + "@ucsc.edu",
+            first_name=first_name,
+            last_name=last_name,
+            password=username,  # To facilitate testing.
+        )
+        auth.register(user, send=False)
+    
+    a_users = db(db.auth_user).select()
+    
+    for a_u in a_users:
+        username = "_%s%.2i" % (a_u.first_name.lower(), random.randint(1,21))
         profilePic = random.choice(
             ["profileTemplate.jpg", "profileTrees.jpg", "profileSammy.jpg", "profileSlug.jpg",
              "profileCampus.jpg"])
@@ -136,10 +150,11 @@ def add_users_for_testing(num_users):
         sunday = random.choice([r_times[su] + "-" + r_times[su+1], "None"])
 
         user_info = dict(
+            user_id = a_u.id,
             username=username,
             #email=username + "@ucsc.edu",
-            firstName=first_name,
-            lastName=last_name,
+            firstName=a_u.first_name,
+            lastName=a_u.last_name,
             password=username,  # To facilitate testing.
             category=category,
             numSeats=numSeats,
@@ -162,6 +177,9 @@ def add_users_for_testing(num_users):
         #auth.register(user_info, send=False)
         # Adds some content for each user.
         db.user.insert(**user_info)
+
+    
+        
     users = db(db.user).select()
     for u in users:
         user_schedule = dict(
