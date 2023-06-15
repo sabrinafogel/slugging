@@ -24,10 +24,11 @@
 
 <div class="columns" id="vue-target">
 
-    <div class="column is-one-quarter">
-        <img src="[[=URL('static', 'profileTemplate.jpg')]]", class="avatar">
-    </div>
     [[for p in profile:]]
+    <div class="column is-one-quarter">
+        <img src="[[=p['profilePic']]]", class="avatar">
+    </div>
+    
     <div class="column is-one-fifth">
         [[if p["category"] == "rider":]]
         <table class="table">
