@@ -59,7 +59,8 @@ def driver():
     # print(markerList)
 
     return dict(results=results, driverURL = URL('driver'), getUserURL = URL('getUser'),
-                url_signer=url_signer, mapURL = URL('map'))
+                url_signer=url_signer, mapURL = URL('map'),get_rating_url = URL('get_rating', signer=url_signer),
+        set_rating_url = URL('set_rating', signer=url_signer))
 
 # map info
 @action("map")
