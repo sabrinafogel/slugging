@@ -32,6 +32,7 @@ from .common import db, session, T, cache, auth, logger, authenticated, unauthen
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_email, get_time
 import random
+import re
 
 url_signer = URLSigner(session)
 
@@ -158,8 +159,16 @@ def message(id = None):
 @action("load_messages")
 @action.uses(url_signer.verify(), db, auth.user)
 def load_messages():
+    # get the id of the user we are messaging
+    # otherUserId = request.json.get('otherID')
+    # otherUserId = otherUserId[0]['id']
+    otherUserId = db(db.tempID).select()
+
+    print("otherUserId: ", otherUserId[0])
+
     # Retrieve the logged-in user's ID
     user_id = auth.current_user.get('id') #new
+    print("user id: ", user_id)
 
     # Get the user's username and profile picture
     # user = db.auth_user[user_id]
@@ -177,10 +186,6 @@ def load_messages():
     # Add username and profile picture to each message
     # for comment in comment_list:
     #     comment['username'] = username#new
-
-    # get the id of the user we are messaging
-    otherUserId = request.query.get('id')
-    # print(otherUserId)
 
     # get messages logged in user sent to person they are messaging, and vise versa
     comment_list = [row for row in db(((db.user_message.user_id == user_id) & (db.user_message.otherUserID == otherUserId)) | ((db.user_message.user_id == otherUserId) & (db.user_message.otherUserID == user_id))).select(db.user_message.user_id, db.user_message.text, db.user_message.timestamp, orderby=db.user_message.timestamp)]
@@ -234,7 +239,7 @@ def editSchedule(schedule_id = None):
     return dict(form=form)
 
 @action("getUser", method=["GET", "POST"])
-@action.uses(db, auth.user)
+@action.uses(db)
 def getUser():
     if request.method == 'POST':
         # get the user id being messaged
@@ -247,8 +252,10 @@ def getUser():
         db.tempID.insert(id=id)
         db.commit()
 
+        # <input class="input" type="text" v-model="new_comment" style="width: 90vw;" @focus="getUser([[=p['id']]])"/>
+
     id = db(db.tempID).select()
-    print(id)
+    # print(id)
 
     return dict(id=id)
 
