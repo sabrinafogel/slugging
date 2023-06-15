@@ -31,6 +31,7 @@ from py4web.utils.form import Form, FormStyleBulma
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_email, get_time
+import random
 
 url_signer = URLSigner(session)
 
@@ -77,22 +78,38 @@ def rider():
 @action.uses(db, 'profile.html', auth)
 def profile():
     rows = db(db.auth_user.email == get_user_email() ).select().as_list()
+    
+    for r in rows:
+       profile = db(db.user.firstName == r['first_name'] and db.user.lastName == r['last_name']).select().as_list()
+       
+    if len(profile) <=0:
+        print("Add current user to user list")
+        u_info = db(db.auth_user.email == get_user_email() ).select().first()
+        assert u_info is not None
+        username = "_%s%.2i" % (u_info.first_name.lower(),2)
+        category = random.choice(["rider", "driver"])
+        db.user.update_or_insert(firstName = u_info.first_name, lastName = u_info.last_name, username=username, category=category)
+        profile = db(db.user.firstName == r['first_name'] and db.user.lastName == r['last_name']).select().as_list()
+    
     schedule = db(db.schedule.user_email == get_user_email()).select()
-    return dict(rows=rows, schedule=schedule)
+
+    return dict(rows=rows, schedule=schedule, profile=profile)
+
 
 
 @action('editProfile/<user_id:int>', method=["GET","POST"])
 @action.uses(db, session, url_signer, "editProfile.html", auth)
 def editProfile(user_id=None):
     assert user_id is not None 
-    form = Form(db.auth_user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
-    a = db(db.auth_user.id == user_id).select().first()
+    form = Form(db.user, record=user_id, formstyle=FormStyleBulma, csrf_session=session)
+    a = db(db.user.id == user_id).select().first()
     if form.accepted:
        redirect(URL('profile'))
        
     rows = db(db.schedule.user_email == get_user_email()).select()
     
     return dict(rows=rows, account=a,form=form, user_id=user_id, url_signer=url_signer)
+
 
 @action('schedule/<user_id:int>', method=["GET","POST"])
 @action.uses(db, session, url_signer, "schedule.html", auth)
