@@ -107,6 +107,9 @@ def add_users_for_testing(num_users):
         first_name = random.choice(FIRST_NAMES)
         last_name = random.choice(LAST_NAMES)
         username = "_%s%.2i" % (first_name.lower(), k)
+        profilePic = random.choice(
+            ["profileTemplate.jpg", "profileTrees.jpg", "profileSammy.jpg", "profileSlug.jpg",
+             "profileCampus.jpg"])
         category = random.choice(["rider", "driver"])
         numSeats = random.randint(2,5)
         carModel = random.choice(model)
@@ -144,6 +147,7 @@ def add_users_for_testing(num_users):
             location=location,
             license = license,
             schedule = schedule,
+            profilePic = profilePic,
 
             #temporary database
             monday=monday,
